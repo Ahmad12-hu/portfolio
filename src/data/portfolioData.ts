@@ -1,7 +1,7 @@
 import { Project, SkillCategory, TimelineItem, UserProfile, Testimonial } from '../types';
 
 export const userProfile: UserProfile = {
-  name: "Laye",
+  name: "Amadou Ka",
   title: "Développeur Web en Apprentissage",
   subtitle: "Jeune polyvalent & autodidacte",
   tagline: "Développement web, gestion de projets et innovation numérique.",
