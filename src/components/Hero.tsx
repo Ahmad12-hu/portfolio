@@ -87,10 +87,6 @@ export const Hero: React.FC<HeroProps> = ({ darkMode, onOpenCv, profile }) => {
               <span>Autodidacte ({currentProfile.stats.experienceYears})</span>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-200 text-xs font-mono font-bold backdrop-blur-md">
-              <span className="w-2 h-2 rounded-full bg-amber-300" />
-              <span>Focus Études & Recherche</span>
-            </div>
 
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/15 border border-cyan-500/40 text-cyan-200 text-xs font-mono font-bold backdrop-blur-md">
               <MapPin className="w-3.5 h-3.5 text-cyan-300" />
