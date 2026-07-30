@@ -78,7 +78,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode, onOpenCv,
           id="logo-link"
         >
           <span className="text-xl sm:text-2xl font-black tracking-wider text-white font-mono">
-            LAY_PORTFOLIO<span className="text-emerald-400">.</span>
+            MON_PORTFOLIO<span className="text-emerald-400">.</span>
           </span>
         </a>
 
