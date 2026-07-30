@@ -105,7 +105,7 @@ export const Hero: React.FC<HeroProps> = ({ darkMode, onOpenCv, profile }) => {
               <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 border-[#03140d] dark:border-slate-950" />
             </div>
             <div>
-              <h2 className="text-sm sm:text-base font-bold text-white">{currentProfile.name}</h2>
+              <h2 className={`text-sm sm:text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>{currentProfile.name}</h2>
               <p className={`text-xs font-mono font-semibold ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>
                 {currentProfile.title}
               </p>

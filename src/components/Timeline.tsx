@@ -79,11 +79,11 @@ export const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
                       </div>
 
                       <div>
-                        <h3 className="text-lg font-bold text-white">{item.role}</h3>
-                        <p className="text-xs font-medium text-cyan-400 font-mono mt-0.5">{item.institution}</p>
+                        <h3 className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>{item.role}</h3>
+                        <p className={`text-xs font-medium font-mono mt-0.5 ${darkMode ? 'text-cyan-400' : 'text-cyan-600'}`}>{item.institution}</p>
                       </div>
 
-                      <p className={`text-xs leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                      <p className={`text-xs leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>
                         {item.description}
                       </p>
 

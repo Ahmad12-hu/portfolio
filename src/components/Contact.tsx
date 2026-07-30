@@ -170,13 +170,17 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
               <h3 className="text-xl font-bold tracking-tight mb-6">M'envoyer un message</h3>
 
               {submitted ? (
-                <div className="p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-3 animate-fadeIn">
-                  <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto text-xl font-bold">
+                <div className={`p-6 rounded-xl border text-center space-y-3 animate-fadeIn ${
+                  darkMode ? 'bg-emerald-500/10 border-emerald-500/30 text-white' : 'bg-emerald-50 border-emerald-200 text-slate-900'
+                }`}>
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto text-xl font-bold ${
+                    darkMode ? 'bg-emerald-500/20 text-emerald-400' : 'bg-emerald-500 text-white'
+                  }`}>
                     ✓
                   </div>
-                  <h4 className="font-bold text-lg text-white">Message envoyé avec succès !</h4>
-                  <p className="text-xs text-slate-300">
-                    Merci pour votre message. Je vous répondrai dans les plus brefs délais sur <span className="text-emerald-400 font-mono">{userProfile.email}</span>.
+                  <h4 className={`font-bold text-lg ${darkMode ? 'text-white' : 'text-slate-900'}`}>Message envoyé avec succès !</h4>
+                  <p className={`text-xs ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                    Merci pour votre message. Je vous répondrai dans les plus brefs délais sur <span className="text-emerald-600 font-mono">{userProfile.email}</span>.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}

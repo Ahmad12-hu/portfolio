@@ -249,8 +249,8 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode, onSelectProject })
               <Layers className="w-6 h-6 text-emerald-400" />
             </div>
             <div className="space-y-1">
-              <h4 className="text-base font-bold text-emerald-200">Prochains Projets en Développement</h4>
-              <p className="text-xs text-emerald-200/70 max-w-lg mx-auto">
+              <h4 className={`text-base font-bold ${darkMode ? 'text-emerald-200' : 'text-emerald-700'}`}>Prochains Projets en Développement</h4>
+              <p className={`text-xs max-w-lg mx-auto ${darkMode ? 'text-emerald-200/70' : 'text-slate-600'}`}>
                 De nouveaux outils web et mobiles sont actuellement en phase de conception. La grille accueillera directement mes futures réalisations au fur et à mesure de leur déploiement.
               </p>
             </div>

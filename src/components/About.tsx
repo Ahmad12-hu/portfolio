@@ -72,7 +72,7 @@ export const About: React.FC<AboutProps> = ({ darkMode }) => {
                     </div>
                     <div>
                       <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400">Auto-formation</h4>
-                      <p className="text-xs font-medium opacity-90">Parcours structuré sur freeCodeCamp, documentation officielle et projets concrets.</p>
+                      <p className={`text-xs font-medium ${darkMode ? 'text-emerald-100/85' : 'text-slate-600'}`}>Parcours structuré sur freeCodeCamp, documentation officielle et projets concrets.</p>
                     </div>
                   </div>
 
@@ -82,7 +82,7 @@ export const About: React.FC<AboutProps> = ({ darkMode }) => {
                     </div>
                     <div>
                       <h4 className="text-xs font-bold uppercase tracking-wider text-teal-400">Engagé</h4>
-                      <p className="text-xs font-medium opacity-90">Animation active de la communauté WhatsApp de partage dev au Sénégal.</p>
+                      <p className={`text-xs font-medium ${darkMode ? 'text-emerald-100/85' : 'text-slate-600'}`}>Animation active de la communauté WhatsApp de partage dev au Sénégal.</p>
                     </div>
                   </div>
                 </div>
@@ -98,7 +98,7 @@ export const About: React.FC<AboutProps> = ({ darkMode }) => {
                   <CheckCircle2 className="w-5 h-5" />
                 </div>
                 <h4 className="text-xs font-bold">Code Propre & Utile</h4>
-                <p className="text-[11px] opacity-80">Composants réutilisables, lisibles et optimisés.</p>
+                <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-600'}`}>Composants réutilisables, lisibles et optimisés.</p>
               </div>
 
               <div className={`p-4 rounded-2xl border text-center space-y-2 backdrop-blur-md transition-all ${
@@ -108,7 +108,7 @@ export const About: React.FC<AboutProps> = ({ darkMode }) => {
                   <Heart className="w-5 h-5" />
                 </div>
                 <h4 className="text-xs font-bold">Projets Utiles</h4>
-                <p className="text-[11px] opacity-80">Agri-Tech Intelligente avec KA-Farm.</p>
+                <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-600'}`}>Agri-Tech Intelligente avec KA-Farm.</p>
               </div>
 
               <div className={`p-4 rounded-2xl border text-center space-y-2 backdrop-blur-md transition-all ${
@@ -118,7 +118,7 @@ export const About: React.FC<AboutProps> = ({ darkMode }) => {
                   <Award className="w-5 h-5" />
                 </div>
                 <h4 className="text-xs font-bold">Esprit d'Équipe</h4>
-                <p className="text-[11px] opacity-80">Co-développement familial et partage open source.</p>
+                <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-600'}`}>Co-développement familial et partage open source.</p>
               </div>
             </div>
 
