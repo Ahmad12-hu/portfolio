@@ -147,7 +147,7 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
                     </div>
                     <div>
                       <div className="text-[10px] font-mono uppercase tracking-wider text-emerald-400">LinkedIn</div>
-                      <div className="text-xs font-bold">Amadou Ka</div>
+                      <div className="text-xs font-bold">Laye</div>
                     </div>
                   </div>
                   <span className="text-xs text-emerald-400 font-mono group-hover:translate-x-1 transition-transform">→</span>
