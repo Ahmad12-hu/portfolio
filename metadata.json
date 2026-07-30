@@ -1,0 +1,6 @@
+{
+  "name": "Portfolio Amadou Ka",
+  "description": "Portfolio interactif de Amadou Ka — Étudiant en développement web à Dakar, Sénégal",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
