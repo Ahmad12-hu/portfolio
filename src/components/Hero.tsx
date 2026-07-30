@@ -75,25 +75,25 @@ export const Hero: React.FC<HeroProps> = ({ darkMode, onOpenCv, profile }) => {
           
           {/* Subtitle Pill & Status Badges */}
           <div className="flex flex-wrap items-center gap-3">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono backdrop-blur-md shadow-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-xs font-mono backdrop-blur-md shadow-sm">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-emerald-400 font-bold uppercase tracking-wider">
+              <span className="text-emerald-300 font-bold uppercase tracking-wider">
                 {currentProfile.subtitle || 'Jeune polyvalent'}
               </span>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold backdrop-blur-md">
-              <Award className="w-3.5 h-3.5 text-emerald-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-xs font-mono font-bold backdrop-blur-md">
+              <Award className="w-3.5 h-3.5 text-emerald-300" />
               <span>Autodidacte ({currentProfile.stats.experienceYears})</span>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono font-bold backdrop-blur-md">
-              <span className="w-2 h-2 rounded-full bg-amber-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-200 text-xs font-mono font-bold backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-amber-300" />
               <span>Focus Études & Recherche</span>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-bold backdrop-blur-md">
-              <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/15 border border-cyan-500/40 text-cyan-200 text-xs font-mono font-bold backdrop-blur-md">
+              <MapPin className="w-3.5 h-3.5 text-cyan-300" />
               <span>{currentProfile.location}, {currentProfile.country}</span>
             </div>
           </div>
