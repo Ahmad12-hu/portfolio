@@ -7,7 +7,7 @@ export const userProfile: UserProfile = {
   tagline: "Développement web, gestion de projets et innovation numérique.",
   location: "Dakar",
   country: "Sénégal 🇸🇳",
-  avatar: "/src/assets/images/amadou_ka_photo.jpg.jpeg",
+  avatar: "/amadou_ka_photo.jpg.jpeg",
   bio: "Bonjour, je suis Amadou Ka, développeur web en apprentissage (1 an et quelques mois) basé à Dakar. Passionné d'innovation numérique, je conçois des solutions digitales concrètes et autonomes.",
   detailedBio: "Développeur web en apprentissage depuis 1 an et quelques mois, je maîtrise progressivement HTML, CSS, Tailwind CSS, Git, GitHub, JavaScript et les bases de React. Créateur autonome de la plateforme agricole KA-Farm (reliant la ferme au village et le suivi à distance en ville).",
   email: "amadoucoumbaka@gmail.com",
@@ -43,7 +43,7 @@ export const projectsData: Project[] = [
     githubUrl: "https://github.com/Ahmad12-hu/ka-farm",
     demoUrl: "https://ka-farm.vercel.app",
     featured: true,
-    image: "/src/assets/images/ka_farm_hero_1785154816687.jpg",
+    image: "/ka_farm_hero_1785154816687.jpg",
     interactiveType: "ka-farm",
     stats: [
       { label: "Usage", value: "Village & Ville" },
