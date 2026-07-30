@@ -22,18 +22,18 @@ export const About: React.FC<AboutProps> = ({ darkMode }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono backdrop-blur-md shadow-inner">
             <User className="w-3.5 h-3.5" />
             <span>À propos de moi</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
             Passionné par le code, guidé par <br />
             <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
               l'impact social et communautaire
             </span>
           </h2>
-          <p className={`text-base sm:text-lg ${darkMode ? 'text-emerald-200/80' : 'text-slate-600'}`}>
+          <p className={`text-sm sm:text-base lg:text-lg ${darkMode ? 'text-emerald-200/80' : 'text-slate-600'}`}>
             Basé à Dakar (Sénégal), je mets la technologie au service de solutions concrètes pour mon entourage et la communauté des jeunes développeurs.
           </p>
         </div>
@@ -43,20 +43,20 @@ export const About: React.FC<AboutProps> = ({ darkMode }) => {
           
           {/* Left Column: Dakar Card & Bio */}
           <div className="lg:col-span-7 space-y-6">
-            <div className={`p-8 rounded-3xl border backdrop-blur-md relative overflow-hidden transition-all shadow-xl ${
+            <div className={`p-6 sm:p-8 rounded-3xl border backdrop-blur-md relative overflow-hidden transition-all shadow-xl ${
               darkMode
                 ? 'bg-[#041a12]/40 border-emerald-500/20 shadow-emerald-950/20'
                 : 'bg-white/80 border-emerald-200 shadow-slate-200/50'
             }`}>
               <div className="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
-                <Globe2 className="w-40 h-40 text-emerald-400" />
+                <Globe2 className="w-24 sm:w-40 h-24 sm:h-40 text-emerald-400" />
               </div>
 
               <div className="space-y-6 relative z-10">
                 <div className="flex items-center gap-3">
-                  <span className="text-3xl">🇸🇳</span>
+                  <span className="text-2xl sm:text-3xl">🇸🇳</span>
                   <div>
-                    <h3 className="text-xl font-bold">{userProfile.name}</h3>
+                    <h3 className="text-lg sm:text-xl font-bold">{userProfile.name}</h3>
                     <p className="text-xs font-mono text-emerald-400 font-semibold">{userProfile.title} @ Dakar</p>
                   </div>
                 </div>

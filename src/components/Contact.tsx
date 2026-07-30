@@ -43,31 +43,31 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-8 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono backdrop-blur-md shadow-inner">
             <MessageSquare className="w-3.5 h-3.5" />
             <span>Me Contacter</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
             Discutons de votre <br />
             <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
               Prochain Projet
             </span>
           </h2>
-          <p className={`text-base ${darkMode ? 'text-emerald-200/80' : 'text-slate-600'}`}>
+          <p className={`text-sm sm:text-base ${darkMode ? 'text-emerald-200/80' : 'text-slate-600'}`}>
             Actuellement étudiant en développement web, je suis ouvert aux collaborations, projets concrets et opportunités d'apprentissage. Contactez-moi !
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+
           {/* Left Column: Direct Contact Info & Socials */}
           <div className="lg:col-span-5 space-y-6">
-            
-            <div className={`p-6 sm:p-8 rounded-3xl border space-y-6 backdrop-blur-md transition-all shadow-xl ${
+
+            <div className={`p-5 sm:p-6 lg:p-8 rounded-3xl border space-y-4 sm:space-y-6 backdrop-blur-md transition-all shadow-xl ${
               darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200 shadow-slate-200/50'
             }`}>
-              <h3 className="text-xl font-bold tracking-tight">Coordonnées</h3>
+              <h3 className="text-lg sm:text-xl font-bold tracking-tight">Coordonnées</h3>
 
               <div className="space-y-4">
                 {/* Email Box with copy button */}
@@ -164,10 +164,10 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
 
           {/* Right Column: Interactive Form */}
           <div className="lg:col-span-7">
-            <div className={`p-6 sm:p-8 rounded-3xl border backdrop-blur-md transition-all shadow-xl ${
+            <div className={`p-5 sm:p-6 lg:p-8 rounded-3xl border backdrop-blur-md transition-all shadow-xl ${
               darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200 shadow-slate-200/50'
             }`}>
-              <h3 className="text-xl font-bold tracking-tight mb-6">M'envoyer un message</h3>
+              <h3 className="text-lg sm:text-xl font-bold tracking-tight mb-4 sm:mb-6">M'envoyer un message</h3>
 
               {submitted ? (
                 <div className={`p-6 rounded-xl border text-center space-y-3 animate-fadeIn ${

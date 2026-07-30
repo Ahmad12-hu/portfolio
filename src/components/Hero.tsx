@@ -114,25 +114,25 @@ export const Hero: React.FC<HeroProps> = ({ darkMode, onOpenCv, profile }) => {
 
           {/* Main Headline */}
           <div className="space-y-4">
-            <h1 className={`text-4xl sm:text-6xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] ${
+            <h1 className={`text-2xl sm:text-4xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] ${
               darkMode ? 'text-white' : 'text-slate-900'
             }`}>
               {currentProfile.title}
             </h1>
 
             {/* Typewriter Tagline */}
-            <div className="flex items-center gap-2.5 py-1 text-xl sm:text-3xl font-bold font-mono tracking-tight min-h-[3rem]">
+            <div className="flex items-center gap-2.5 py-1 text-base sm:text-xl lg:text-3xl font-bold font-mono tracking-tight min-h-[2.5rem] sm:min-h-[3rem]">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
                 {displayedTypewriterText}
               </span>
               <span
-                className={`w-0.5 h-7 bg-emerald-400 inline-block transition-opacity duration-100 ${
+                className={`w-0.5 h-5 sm:h-7 bg-emerald-400 inline-block transition-opacity duration-100 ${
                   blink ? 'opacity-100' : 'opacity-0'
                 }`}
               />
             </div>
 
-            <p className={`text-base sm:text-lg font-normal leading-relaxed max-w-3xl ${
+            <p className={`text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-3xl ${
               darkMode ? 'text-emerald-100/80' : 'text-slate-700'
             }`}>
               {currentProfile.bio}
@@ -140,11 +140,11 @@ export const Hero: React.FC<HeroProps> = ({ darkMode, onOpenCv, profile }) => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-wrap items-center gap-4 pt-2" id="hero-actions">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2" id="hero-actions">
             <a
               href="#contact"
               onClick={scrollToContact}
-              className="flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-extrabold text-sm shadow-xl shadow-emerald-500/20 transition-all duration-300 hover:scale-105 active:scale-95"
+              className="flex items-center gap-2.5 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-xl shadow-emerald-500/20 transition-all duration-300 hover:scale-105 active:scale-95"
               id="hero-contact-btn"
             >
               <span>Me contacter</span>
@@ -153,7 +153,7 @@ export const Hero: React.FC<HeroProps> = ({ darkMode, onOpenCv, profile }) => {
 
             <button
               onClick={onOpenCv}
-              className={`flex items-center gap-2.5 px-7 py-4 rounded-2xl border font-bold text-sm transition-all duration-300 hover:scale-105 backdrop-blur-md ${
+              className={`flex items-center gap-2.5 px-5 sm:px-7 py-3 sm:py-4 rounded-2xl border font-bold text-xs sm:text-sm transition-all duration-300 hover:scale-105 backdrop-blur-md ${
                 darkMode
                   ? 'bg-[#041a12]/80 border-emerald-500/30 text-emerald-200 hover:text-white hover:bg-emerald-900/40'
                   : 'bg-white/90 border-emerald-200 text-slate-800 hover:bg-emerald-50'

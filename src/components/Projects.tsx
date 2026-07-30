@@ -37,25 +37,25 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode, onSelectProject })
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono backdrop-blur-md shadow-inner">
             <FolderGit2 className="w-3.5 h-3.5" />
             <span>Réalisations & Projets</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
             Mes Projets <br />
             <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
               Concrets & Déployés
             </span>
           </h2>
-          <p className={`text-base ${darkMode ? 'text-emerald-200/80' : 'text-slate-600'}`}>
+          <p className={`text-sm sm:text-base ${darkMode ? 'text-emerald-200/80' : 'text-slate-600'}`}>
             Découvrez mon projet principal KA-Farm, une application web & PWA développée pour répondre à des besoins concrets du secteur agricole au Sénégal.
           </p>
         </div>
 
         {/* Filter Controls & Search */}
-        <div className="space-y-6 mb-12">
-          
+        <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-12">
+
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Category Tabs */}
             <div className={`flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl border backdrop-blur-md ${
@@ -65,7 +65,7 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode, onSelectProject })
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
+                  className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
                     selectedCategory === cat
                       ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-bold shadow-lg shadow-emerald-500/20'
                       : darkMode
@@ -113,7 +113,7 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode, onSelectProject })
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
                 {/* Image Showcase Column with Browser Mockup Frame */}
-                <div className="lg:col-span-6 relative flex flex-col justify-between min-h-[300px] lg:min-h-[420px] bg-[#02100a]/70 backdrop-blur-md overflow-hidden border-b lg:border-b-0 lg:border-r border-emerald-500/20">
+                <div className="lg:col-span-6 relative flex flex-col justify-between min-h-[250px] sm:min-h-[300px] lg:min-h-[420px] bg-[#02100a]/70 backdrop-blur-md overflow-hidden border-b lg:border-b-0 lg:border-r border-emerald-500/20">
                   
                   {/* Browser Window Header Bar */}
                   <div className="flex items-center justify-between px-4 py-3 bg-[#031810]/80 border-b border-emerald-500/20 z-10 backdrop-blur-md">
@@ -161,10 +161,10 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode, onSelectProject })
                 </div>
 
                 {/* Information Column */}
-                <div className="lg:col-span-6 p-6 sm:p-8 flex flex-col justify-between space-y-6">
-                  <div className="space-y-4">
+                <div className="lg:col-span-6 p-5 sm:p-6 lg:p-8 flex flex-col justify-between space-y-4 sm:space-y-6">
+                  <div className="space-y-3 sm:space-y-4">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight group-hover:text-emerald-300 transition-colors">
+                      <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight group-hover:text-emerald-300 transition-colors">
                         {project.title}
                       </h3>
                       <span className="text-xs font-mono text-emerald-400/60">01 / 01</span>
@@ -185,7 +185,7 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode, onSelectProject })
                       <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
                         Points Clés du Projet :
                       </h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      <div className="grid grid-cols-1 gap-2 text-xs">
                         {project.highlights.map((item, idx) => (
                           <div key={idx} className="flex items-start gap-2 text-emerald-100/80">
                             <span className="text-emerald-400 font-bold mt-0.5">•</span>
@@ -199,22 +199,22 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode, onSelectProject })
                   </div>
 
                   {/* Actions & Links */}
-                  <div className="pt-6 border-t border-emerald-500/20 flex flex-wrap items-center justify-between gap-4">
+                  <div className="pt-4 sm:pt-6 border-t border-emerald-500/20 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
                     <button
                       onClick={() => onSelectProject(project)}
-                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500 hover:text-slate-950 font-mono text-xs font-bold transition-all"
+                      className="flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500 hover:text-slate-950 font-mono text-xs font-bold transition-all"
                       id={`project-details-btn-${project.id}`}
                     >
                       <Eye className="w-4 h-4" />
                       <span>Vue détaillée & Démo</span>
                     </button>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
                       <a
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#03140d]/80 border border-emerald-500/30 text-emerald-200 hover:text-white hover:border-emerald-400 text-xs font-semibold font-mono transition-all backdrop-blur-md"
+                        className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 rounded-xl bg-[#03140d]/80 border border-emerald-500/30 text-emerald-200 hover:text-white hover:border-emerald-400 text-xs font-semibold font-mono transition-all backdrop-blur-md"
                         id={`project-github-link-${project.id}`}
                       >
                         <Github className="w-4 h-4" />
@@ -226,7 +226,7 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode, onSelectProject })
                           href={project.demoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-extrabold text-xs font-mono shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 transition-all hover:scale-105"
+                          className="flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-extrabold text-xs font-mono shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 transition-all hover:scale-105"
                           id={`project-demo-link-${project.id}`}
                         >
                           <span>Visiter KA-Farm</span>

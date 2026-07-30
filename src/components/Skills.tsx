@@ -58,31 +58,31 @@ export const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono backdrop-blur-md shadow-inner">
             <Cpu className="w-3.5 h-3.5" />
             <span>Compétences & Stack Technique</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
             Mon Écosystème <br />
             <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
               de Développement
             </span>
           </h2>
-          <p className={`text-base ${darkMode ? 'text-emerald-200/80' : 'text-slate-600'}`}>
+          <p className={`text-sm sm:text-base ${darkMode ? 'text-emerald-200/80' : 'text-slate-600'}`}>
             Maîtrise des fondamentaux du Web et pratique des frameworks modernes orientés performance, maintenabilité et expérience utilisateur.
           </p>
         </div>
 
         {/* Filter Category Tabs */}
-        <div className={`flex flex-wrap items-center justify-center gap-2 mb-10 p-1.5 rounded-2xl border backdrop-blur-md max-w-xl mx-auto ${
+        <div className={`flex flex-wrap items-center justify-center gap-2 mb-8 sm:mb-10 p-1.5 rounded-2xl border backdrop-blur-md max-w-xl mx-auto ${
           darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200'
         }`}>
           {filterOptions.map((filter) => (
             <button
               key={filter}
               onClick={() => setSelectedFilter(filter)}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
+              className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
                 selectedFilter === filter
                   ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-bold shadow-lg shadow-emerald-500/20'
                   : darkMode
@@ -96,23 +96,23 @@ export const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
         </div>
 
         {/* Skill Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16">
           {filteredCategories.map((category, catIndex) => (
             <div
               key={category.name}
-              className={`p-6 sm:p-8 rounded-3xl border backdrop-blur-md space-y-6 transition-all shadow-xl ${
+              className={`p-5 sm:p-6 lg:p-8 rounded-3xl border backdrop-blur-md space-y-4 sm:space-y-6 transition-all shadow-xl ${
                 darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200 shadow-slate-200/50'
               }`}
             >
-              <div className="flex items-center justify-between pb-4 border-b border-emerald-500/20">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold border border-emerald-500/20">
-                    {catIndex % 4 === 0 && <Code2 className="w-5 h-5" />}
-                    {catIndex % 4 === 1 && <Database className="w-5 h-5" />}
-                    {catIndex % 4 === 2 && <Wrench className="w-5 h-5" />}
-                    {catIndex % 4 === 3 && <HeartHandshake className="w-5 h-5" />}
+              <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-emerald-500/20">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold border border-emerald-500/20">
+                    {catIndex % 4 === 0 && <Code2 className="w-4 h-4 sm:w-5 sm:h-5" />}
+                    {catIndex % 4 === 1 && <Database className="w-4 h-4 sm:w-5 sm:h-5" />}
+                    {catIndex % 4 === 2 && <Wrench className="w-4 h-4 sm:w-5 sm:h-5" />}
+                    {catIndex % 4 === 3 && <HeartHandshake className="w-4 h-4 sm:w-5 sm:h-5" />}
                   </div>
-                  <h3 className="text-lg font-bold tracking-tight">{category.name}</h3>
+                  <h3 className="text-base sm:text-lg font-bold tracking-tight">{category.name}</h3>
                 </div>
                 <span className="text-xs font-mono text-emerald-400/60">{category.skills.length} compétences</span>
               </div>
