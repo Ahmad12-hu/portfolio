@@ -29,7 +29,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const value = {
     lang,
     setLang,
-    t: translations[lang],
+    t: translations[lang] as typeof translations.fr,
   };
 
   return (

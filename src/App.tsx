@@ -16,6 +16,7 @@ import { userProfile as initialUserProfile } from './data/portfolioData';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
+  const [lang, setLang] = useState<'fr' | 'en'>('fr');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [cvModalOpen, setCvModalOpen] = useState(false);
   const [editProfileModalOpen, setEditProfileModalOpen] = useState(false);
