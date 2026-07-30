@@ -27,10 +27,6 @@ export const Footer: React.FC<FooterProps> = ({ darkMode }) => {
             </div>
             <div>
               <div className="font-bold text-white text-base">{userProfile.name}</div>
-              <div className="text-xs text-amber-400 font-mono flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-amber-400" />
-                <span>Focus Études & Recherche</span>
-              </div>
             </div>
           </div>
 
