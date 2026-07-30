@@ -55,7 +55,7 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
             </span>
           </h2>
           <p className={`text-base ${darkMode ? 'text-emerald-200/80' : 'text-slate-600'}`}>
-            Que ce soit pour une opportunité professionnelle, un projet de stage, une mission en freelance ou une collaboration sur un projet à Dakar, contactez-moi !
+            Actuellement étudiant en développement web, je suis ouvert aux collaborations, projets concrets et opportunités d'apprentissage. Contactez-moi !
           </p>
         </div>
 
