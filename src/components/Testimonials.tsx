@@ -63,10 +63,10 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ darkMode }) => {
                   <h4 className={`font-bold text-sm ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                     {item.name}
                   </h4>
-                  <p className="text-xs text-cyan-400 font-medium">
+                  <p className={`text-xs font-medium ${darkMode ? 'text-cyan-400' : 'text-cyan-600'}`}>
                     {item.role}
                   </p>
-                  <p className="text-[11px] text-slate-400">
+                  <p className={`text-[11px] ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
                     {item.company}
                   </p>
                 </div>
