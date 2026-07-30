@@ -124,58 +124,6 @@ export const About: React.FC<AboutProps> = ({ darkMode }) => {
 
           </div>
 
-          {/* Right Column: WhatsApp Community Impact Focus */}
-          <div className="lg:col-span-5">
-            <div className={`p-6 rounded-3xl border relative overflow-hidden backdrop-blur-md shadow-2xl transition-all ${
-              darkMode ? 'bg-[#041a12]/50 border-emerald-500/30' : 'bg-white/90 border-emerald-200'
-            }`}>
-              <div className="absolute -right-8 -top-8 w-32 h-32 bg-emerald-500/15 rounded-full blur-2xl" />
-
-              <div className="flex items-center justify-between pb-4 border-b border-emerald-500/20 mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold border border-emerald-500/30">
-                    💬
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-sm">WhatsApp Teaching Hub</h3>
-                    <p className="text-xs opacity-75">Initiative communautaire bénévole</p>
-                  </div>
-                </div>
-                <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-mono font-bold border border-emerald-500/30">
-                  EN DIRECT
-                </span>
-              </div>
-
-              <div className="space-y-4">
-                <p className="text-xs opacity-90 leading-relaxed">
-                  Afin de rendre le développement web accessible à d'autres jeunes sénégalais sans ordinateur puissant ni connexion permanente, je crée et partage des modules de cours simplifiés directement sur WhatsApp.
-                </p>
-
-                <div className={`space-y-2 p-4 rounded-2xl border text-xs font-mono backdrop-blur-md ${
-                  darkMode ? 'bg-[#02100a]/80 border-emerald-500/20' : 'bg-emerald-50/70 border-emerald-200'
-                }`}>
-                  <div className="text-emerald-400 font-bold"># Impact mesurable :</div>
-                  <div className="flex items-center justify-between">
-                    <span>• Apprenants actifs :</span>
-                    <span className="text-emerald-400 font-bold">120+ membres</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>• Projets tuteurs créés :</span>
-                    <span className="text-emerald-400 font-bold">Quiz CSS & Exercices</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>• Fréquence des cours :</span>
-                    <span className="text-emerald-400 font-bold">Hebdomadaire</span>
-                  </div>
-                </div>
-
-                <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center gap-3 text-xs text-emerald-300 backdrop-blur-md">
-                  <Sparkles className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span>"Transmettre ce que l'on apprend est la meilleure façon de maîtriser le code."</span>
-                </div>
-              </div>
-            </div>
-          </div>
 
         </div>
 
