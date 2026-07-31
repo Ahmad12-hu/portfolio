@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { X, Save, User, Mail, MapPin, Briefcase, Link, Phone } from 'lucide-react';
 import { UserProfile } from '../types';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface EditProfileModalProps {
   isOpen: boolean;
   onClose: () => void;
   userProfile: UserProfile;
   onSave: (updated: UserProfile) => void;
-  darkMode: boolean;
 }
 
 export const EditProfileModal: React.FC<EditProfileModalProps> = ({
   isOpen,
   onClose,
   userProfile,
-  onSave,
-  darkMode
+  onSave
 }) => {
+  const { darkMode } = useTheme();
   const [formData, setFormData] = useState<UserProfile>({ ...userProfile });
 
   if (!isOpen) return null;

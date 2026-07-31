@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Mail, Github, Linkedin, MapPin, Send, Check, Copy, MessageSquare, PhoneCall, GraduationCap } from 'lucide-react';
 import { userProfile } from '../data/portfolioData';
+import { useTheme } from '../contexts/ThemeContext';
 
-interface ContactProps {
-  darkMode: boolean;
-}
-
-export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
+export const Contact = React.memo(() => {
+  const { darkMode } = useTheme();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -277,4 +275,4 @@ export const Contact: React.FC<ContactProps> = ({ darkMode }) => {
       </div>
     </section>
   );
-};
+});

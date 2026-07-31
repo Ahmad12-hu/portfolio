@@ -1,14 +1,15 @@
 import React from 'react';
 import { X, Download, Printer, Mail, MapPin, Github, Linkedin, ExternalLink, Globe, CheckCircle2 } from 'lucide-react';
 import { userProfile, projectsData, skillCategories, timelineData } from '../data/portfolioData';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface CvModalProps {
   isOpen: boolean;
   onClose: () => void;
-  darkMode: boolean;
 }
 
-export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose, darkMode }) => {
+export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
+  const { darkMode } = useTheme();
   if (!isOpen) return null;
 
   const handlePrint = () => {

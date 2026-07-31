@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -13,135 +13,115 @@ import { KeyboardShortcutsModal } from './components/KeyboardShortcutsModal';
 import { AnimatedBackground } from './components/AnimatedBackground';
 import { Project, UserProfile } from './types';
 import { userProfile as initialUserProfile } from './data/portfolioData';
+import { useTheme } from './contexts/ThemeContext';
+
+const KEYBOARD_SHORTCUTS = {
+  c: 'contact',
+  s: 'skills', 
+  p: 'projects',
+  a: 'about',
+  h: 'hero',
+} as const;
 
 export default function App() {
-  const [darkMode, setDarkMode] = useState(true);
-  const [lang, setLang] = useState<'fr' | 'en'>('fr');
+  const { darkMode } = useTheme();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [cvModalOpen, setCvModalOpen] = useState(false);
   const [editProfileModalOpen, setEditProfileModalOpen] = useState(false);
   const [shortcutsModalOpen, setShortcutsModalOpen] = useState(false);
   const [profile, setProfile] = useState<UserProfile>(initialUserProfile);
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
+  const closeAllModals = useCallback(() => {
+    setSelectedProject(null);
+    setCvModalOpen(false);
+    setEditProfileModalOpen(false);
+    setShortcutsModalOpen(false);
+  }, []);
 
-  // Global Keyboard Navigation
+  const scrollToSection = useCallback((sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Ignore if user is inside form inputs, textareas, or contenteditables
       const activeTag = document.activeElement?.tagName.toLowerCase();
-      const isInput = activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select' || (document.activeElement as HTMLElement)?.isContentEditable;
+      const isInput = activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select' || 
+                     (document.activeElement as HTMLElement)?.isContentEditable;
       if (isInput) return;
 
-      const key = e.key.toLowerCase();
-
-      // Close open modals on Escape
       if (e.key === 'Escape') {
-        setSelectedProject(null);
-        setCvModalOpen(false);
-        setEditProfileModalOpen(false);
-        setShortcutsModalOpen(false);
+        closeAllModals();
         return;
       }
 
-      // Keyboard shortcuts
-      if (key === 'c') {
+      const key = e.key.toLowerCase();
+      
+      if (key in KEYBOARD_SHORTCUTS) {
         e.preventDefault();
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-      } else if (key === 's') {
-        e.preventDefault();
-        document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
-      } else if (key === 'p') {
-        e.preventDefault();
-        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-      } else if (key === 'a') {
-        e.preventDefault();
-        document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-      } else if (key === 'h') {
-        e.preventDefault();
-        document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' });
+        scrollToSection(KEYBOARD_SHORTCUTS[key as keyof typeof KEYBOARD_SHORTCUTS]);
       } else if (key === 'v') {
         e.preventDefault();
         setCvModalOpen(true);
       } else if (key === 'k' || key === '?') {
         e.preventDefault();
-        setShortcutsModalOpen((prev) => !prev);
+        setShortcutsModalOpen(prev => !prev);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [closeAllModals, scrollToSection]);
 
   return (
     <div className={`min-h-screen relative transition-colors duration-300 font-sans selection:bg-emerald-500 selection:text-slate-950 ${
       darkMode ? 'bg-[#03140d] text-slate-100' : 'bg-slate-50 text-slate-900'
     }`}>
-      {/* Animated Interactive Background */}
-      <AnimatedBackground darkMode={darkMode} />
+      <AnimatedBackground />
 
-      {/* Navigation Header */}
       <Navbar
-        darkMode={darkMode}
-        setDarkMode={setDarkMode}
         onOpenCv={() => setCvModalOpen(true)}
         onOpenEditProfile={() => setEditProfileModalOpen(true)}
       />
 
-      {/* Main Sections */}
       <main className="relative z-10">
         <Hero
-          darkMode={darkMode}
           onOpenCv={() => setCvModalOpen(true)}
           profile={profile}
         />
 
-        <About darkMode={darkMode} />
+        <About />
 
         <Projects
-          darkMode={darkMode}
-          onSelectProject={(proj) => setSelectedProject(proj)}
+          onSelectProject={setSelectedProject}
         />
 
-        <Skills darkMode={darkMode} />
+        <Skills />
 
-        <Contact darkMode={darkMode} />
+        <Contact />
       </main>
 
-      {/* Footer */}
-      <Footer darkMode={darkMode} />
+      <Footer />
 
-      {/* Modals */}
       <ProjectModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
-        darkMode={darkMode}
       />
 
       <CvModal
         isOpen={cvModalOpen}
         onClose={() => setCvModalOpen(false)}
-        darkMode={darkMode}
       />
 
       <EditProfileModal
         isOpen={editProfileModalOpen}
         onClose={() => setEditProfileModalOpen(false)}
         userProfile={profile}
-        onSave={(updated) => setProfile(updated)}
-        darkMode={darkMode}
+        onSave={setProfile}
       />
 
       <KeyboardShortcutsModal
         isOpen={shortcutsModalOpen}
         onClose={() => setShortcutsModalOpen(false)}
-        darkMode={darkMode}
       />
     </div>
   );

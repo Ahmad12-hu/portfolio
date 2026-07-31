@@ -3,13 +3,14 @@ import { motion } from 'motion/react';
 import { FolderGit2, Search, ExternalLink, Github, Sparkles, ArrowRight, Eye, Layers } from 'lucide-react';
 import { projectsData } from '../data/portfolioData';
 import { Project, ProjectCategory } from '../types';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface ProjectsProps {
-  darkMode: boolean;
   onSelectProject: (project: Project) => void;
 }
 
-export const Projects: React.FC<ProjectsProps> = ({ darkMode, onSelectProject }) => {
+export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
+  const { darkMode } = useTheme();
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>('Tous');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -279,4 +280,4 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode, onSelectProject })
       </div>
     </motion.section>
   );
-};
+});

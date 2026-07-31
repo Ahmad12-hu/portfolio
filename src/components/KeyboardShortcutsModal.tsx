@@ -1,17 +1,17 @@
 import React from 'react';
 import { Keyboard, X, ArrowUp, FileText, Send, Code, User, Sparkles } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface KeyboardShortcutsModalProps {
   isOpen: boolean;
   onClose: () => void;
-  darkMode: boolean;
 }
 
 export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
   isOpen,
   onClose,
-  darkMode,
 }) => {
+  const { darkMode } = useTheme();
   if (!isOpen) return null;
 
   const shortcuts = [

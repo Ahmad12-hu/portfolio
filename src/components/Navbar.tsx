@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Code2, Menu, X, Download, Sun, Moon, Sparkles, MapPin } from 'lucide-react';
 import { userProfile } from '../data/portfolioData';
+import { useTheme } from '../contexts/ThemeContext';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface NavbarProps {
-  darkMode: boolean;
-  setDarkMode: (value: boolean) => void;
   onOpenCv: () => void;
   onOpenEditProfile?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode, onOpenCv, onOpenEditProfile }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenCv, onOpenEditProfile }) => {
+  const { darkMode, toggleDarkMode } = useTheme();
+  const { lang, setLang } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
-  const [lang, setLang] = useState<'FR' | 'EN'>('FR');
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -112,7 +114,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode, onOpenCv,
         <div className="hidden md:flex items-center gap-3">
           {/* Language indicator */}
           <button
-            onClick={() => setLang(lang === 'FR' ? 'EN' : 'FR')}
+            onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
             className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all ${
               darkMode ? 'bg-[#041a12]/80 border border-emerald-500/20 text-emerald-200 hover:text-white' : 'bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900'
             }`}
@@ -120,12 +122,12 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode, onOpenCv,
             id="lang-toggle-btn"
           >
             <span className="text-[11px]">🌐</span>
-            <span>{lang}</span>
+            <span>{lang.toUpperCase()}</span>
           </button>
 
           {/* Theme Switcher */}
           <button
-            onClick={() => setDarkMode(!darkMode)}
+            onClick={toggleDarkMode}
             className={`p-2 rounded-full border transition-all duration-200 ${
               darkMode
                 ? 'bg-slate-900 border-slate-700/80 text-amber-400 hover:bg-slate-800'
@@ -165,7 +167,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode, onOpenCv,
         {/* Mobile menu trigger */}
         <div className="flex items-center gap-2 md:hidden">
           <button
-            onClick={() => setDarkMode(!darkMode)}
+            onClick={toggleDarkMode}
             className={`p-2 rounded-lg border text-sm ${
               darkMode ? 'bg-slate-900 border-slate-800 text-amber-400' : 'bg-slate-100 border-slate-200 text-slate-700'
             }`}

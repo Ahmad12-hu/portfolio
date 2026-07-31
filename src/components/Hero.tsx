@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, Download, Github, Linkedin, Mail, Twitter, Facebook, Sparkles, MapPin, Briefcase, Award } from 'lucide-react';
 import { userProfile } from '../data/portfolioData';
 import { UserProfile } from '../types';
+import { useTheme } from '../contexts/ThemeContext';
 
 const getAvatarSrc = (profile: UserProfile) => {
   if (profile.avatar) return profile.avatar;
@@ -9,7 +10,6 @@ const getAvatarSrc = (profile: UserProfile) => {
 };
 
 interface HeroProps {
-  darkMode: boolean;
   onOpenCv: () => void;
   profile?: UserProfile;
 }
@@ -22,7 +22,8 @@ const TYPEWRITER_TITLES = [
   'Passionné AgriTech (KA-Farm)'
 ];
 
-export const Hero: React.FC<HeroProps> = ({ darkMode, onOpenCv, profile }) => {
+export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
+  const { darkMode } = useTheme();
   const currentProfile = profile || userProfile;
 
   // Typewriter effect state
@@ -224,4 +225,4 @@ export const Hero: React.FC<HeroProps> = ({ darkMode, onOpenCv, profile }) => {
       </div>
     </section>
   );
-};
+});

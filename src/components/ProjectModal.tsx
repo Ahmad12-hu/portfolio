@@ -2,14 +2,15 @@ import React from 'react';
 import { X, Github, ExternalLink, Sparkles, CheckCircle2, Code2, Play } from 'lucide-react';
 import { Project } from '../types';
 import { KaFarmCalculator, SunuJobSimulator, PlayableCssQuiz, FitPulsePreview } from './InteractiveDemos';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface ProjectModalProps {
   project: Project | null;
   onClose: () => void;
-  darkMode: boolean;
 }
 
-export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, darkMode }) => {
+export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  const { darkMode } = useTheme();
   if (!project) return null;
 
   return (
@@ -103,10 +104,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, da
               Démonstration Intégrée Interactive
             </h4>
 
-            {project.interactiveType === 'ka-farm' && <KaFarmCalculator darkMode={darkMode} />}
-            {project.interactiveType === 'sunujob' && <SunuJobSimulator darkMode={darkMode} />}
-            {project.interactiveType === 'quiz-css' && <PlayableCssQuiz darkMode={darkMode} />}
-            {project.interactiveType === 'fitpulse' && <FitPulsePreview darkMode={darkMode} />}
+            {project.interactiveType === 'ka-farm' && <KaFarmCalculator />}
+            {project.interactiveType === 'sunujob' && <SunuJobSimulator />}
+            {project.interactiveType === 'quiz-css' && <PlayableCssQuiz />}
+            {project.interactiveType === 'fitpulse' && <FitPulsePreview />}
             {project.interactiveType === 'digital-hub' && (
               <div className="p-4 rounded-xl border bg-slate-900 border-slate-800 text-xs text-slate-300 space-y-2">
                 <div className="font-bold text-white flex items-center gap-2">

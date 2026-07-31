@@ -1,8 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-
-interface AnimatedBackgroundProps {
-  darkMode: boolean;
-}
+import React, { useEffect, useRef, useMemo } from 'react';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface Point3D {
   x: number;
@@ -17,8 +14,148 @@ interface Point3D {
   isLand: boolean;
 }
 
-export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ darkMode }) => {
+// Structure réutilisée chaque frame pour éviter de recréer des objets/tableaux
+interface ProjectedEntry {
+  point: Point3D;
+  sx: number;
+  sy: number;
+  z: number;
+  scale: number;
+}
+
+// Données géométriques d'un arc, précalculées une seule fois (ne dépendent pas du temps)
+interface ArcGeometry {
+  x1: number; y1: number; z1: number;
+  x2: number; y2: number; z2: number;
+  dot: number;
+  angle: number;
+  ux: number; uy: number; uz: number;
+  progress: number;
+  speed: number;
+}
+
+// Memoize static data
+const LAT_STEPS = 70;
+const LON_STEPS = 120;
+const PARALLELS = [-60, -30, 0, 30, 60];
+const MERIDIANS = Array.from({ length: 12 }, (_, idx) => -180 + idx * 30);
+const TECH_HUBS = [
+  { name: 'Dakar', lat: 14.7, lon: -17.4 },
+  { name: 'Paris', lat: 48.8, lon: 2.3 },
+  { name: 'New York', lat: 40.7, lon: -74.0 },
+  { name: 'Tokyo', lat: 35.6, lon: 139.6 },
+  { name: 'São Paulo', lat: -23.5, lon: -46.6 },
+  { name: 'Sydney', lat: -33.8, lon: 151.2 },
+  { name: 'Cairo', lat: 30.0, lon: 31.2 },
+  { name: 'London', lat: 51.5, lon: -0.1 },
+];
+
+const isLand = (lat: number, lon: number): boolean => {
+  if (lat >= -35 && lat <= 37 && lon >= -18 && lon <= 52) return true; // Africa
+  if (lat >= 36 && lat <= 71 && lon >= -10 && lon <= 42) return true; // Europe
+  if (lat >= 5 && lat <= 75 && lon >= 42 && lon <= 180) return true; // Asia
+  if (lat >= 12 && lat <= 75 && lon >= -168 && lon <= -52) return true; // N. America
+  if (lat >= -56 && lat <= 13 && lon >= -82 && lon <= -34) return true; // S. America
+  if (lat >= -45 && lat <= -10 && lon >= 110 && lon <= 178) return true; // Australia
+  if (lat >= 60 && lat <= 83 && lon >= -75 && lon <= -12) return true; // Greenland
+  if (lat <= -65) return true; // Antarctica
+  return false;
+};
+
+export const AnimatedBackground: React.FC = () => {
+  const { darkMode } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  // Memoize globe points generation
+  const globePoints = useMemo<Point3D[]>(() => {
+    const points: Point3D[] = [];
+    for (let i = 0; i <= LAT_STEPS; i++) {
+      const latDeg = -90 + (180 / LAT_STEPS) * i;
+      const latRad = (latDeg * Math.PI) / 180;
+      const cosLat = Math.cos(latRad);
+      const sinLat = Math.sin(latRad);
+
+      for (let j = 0; j < LON_STEPS; j++) {
+        const lonDeg = -180 + (360 / LON_STEPS) * j;
+        const lonRad = (lonDeg * Math.PI) / 180;
+        const onLand = isLand(latDeg, lonDeg);
+
+        if (!onLand && (i % 4 !== 0 || j % 4 !== 0)) continue;
+
+        const x = cosLat * Math.sin(lonRad);
+        const y = -sinLat;
+        const z = cosLat * Math.cos(lonRad);
+
+        points.push({
+          x, y, z,
+          baseX: x, baseY: y, baseZ: z,
+          size: onLand ? (Math.random() * 1.6 + 1.2) : 0.8,
+          alpha: onLand ? (Math.random() * 0.5 + 0.45) : 0.12,
+          pulse: Math.random() * Math.PI * 2,
+          isLand: onLand,
+        });
+      }
+    }
+    return points;
+  }, []);
+
+  // Buffer réutilisé chaque frame pour la projection + le tri (évite l'allocation d'un
+  // nouveau tableau/objets à chaque frame comme le faisait le .map() d'origine)
+  const projectedBuffer = useMemo<ProjectedEntry[]>(
+    () => globePoints.map((p) => ({ point: p, sx: 0, sy: 0, z: 0, scale: 0 })),
+    [globePoints]
+  );
+
+  // Memoize arcs generation — la géométrie du grand cercle (x1,y1,z1,x2,y2,z2,dot,angle,u*)
+  // ne dépend que des coordonnées des hubs, qui ne changent jamais : on la calcule une seule
+  // fois ici au lieu de refaire tous les sin/cos/acos à chaque frame comme avant.
+  const arcs = useMemo<ArcGeometry[]>(() => {
+    const toVec = (lat: number, lon: number) => {
+      const latRad = (lat * Math.PI) / 180;
+      const lonRad = (lon * Math.PI) / 180;
+      const cosLat = Math.cos(latRad);
+      const sinLat = Math.sin(latRad);
+      return {
+        x: cosLat * Math.sin(lonRad),
+        y: -sinLat,
+        z: cosLat * Math.cos(lonRad),
+      };
+    };
+
+    const buildArc = (
+      h1: { lat: number; lon: number },
+      h2: { lat: number; lon: number },
+      speed: number
+    ): ArcGeometry => {
+      const v1 = toVec(h1.lat, h1.lon);
+      const v2 = toVec(h2.lat, h2.lon);
+      const dot = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+      const angle = Math.acos(Math.max(-1, Math.min(1, dot)));
+      const sinAngle = Math.sin(angle) || 1e-6; // évite une division par zéro
+      const ux = (v2.x - v1.x * dot) / sinAngle;
+      const uy = (v2.y - v1.y * dot) / sinAngle;
+      const uz = (v2.z - v1.z * dot) / sinAngle;
+
+      return {
+        x1: v1.x, y1: v1.y, z1: v1.z,
+        x2: v2.x, y2: v2.y, z2: v2.z,
+        dot, angle,
+        ux, uy, uz,
+        progress: Math.random(),
+        speed,
+      };
+    };
+
+    const arcData: ArcGeometry[] = [];
+    for (let i = 0; i < TECH_HUBS.length; i++) {
+      const h1 = TECH_HUBS[i];
+      const h2 = TECH_HUBS[(i + 1) % TECH_HUBS.length];
+      const h3 = TECH_HUBS[(i + 3) % TECH_HUBS.length];
+      arcData.push(buildArc(h1, h2, 0.004 + Math.random() * 0.006));
+      arcData.push(buildArc(h1, h3, 0.003 + Math.random() * 0.005));
+    }
+    return arcData;
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -34,91 +171,24 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ darkMode
       if (!canvas) return;
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
+      cachedGradient = null; // le rayon change avec la taille, on regénère le gradient
     };
 
     window.addEventListener('resize', handleResize);
 
-    // Initial 3D Earth Globe Angles
     let rotationY = 0.5;
-    const rotationX = 0.38; // Tilt ~22 degrees
+    const rotationX = 0.38;
 
-    // Simplified Earth continent detection
-    const isLand = (lat: number, lon: number): boolean => {
-      if (lat >= -35 && lat <= 37 && lon >= -18 && lon <= 52) return true; // Africa
-      if (lat >= 36 && lat <= 71 && lon >= -10 && lon <= 42) return true; // Europe
-      if (lat >= 5 && lat <= 75 && lon >= 42 && lon <= 180) return true; // Asia
-      if (lat >= 12 && lat <= 75 && lon >= -168 && lon <= -52) return true; // N. America
-      if (lat >= -56 && lat <= 13 && lon >= -82 && lon <= -34) return true; // S. America
-      if (lat >= -45 && lat <= -10 && lon >= 110 && lon <= 178) return true; // Australia
-      if (lat >= 60 && lat <= 83 && lon >= -75 && lon <= -12) return true; // Greenland
-      if (lat <= -65) return true; // Antarctica
-      return false;
-    };
+    // Cache du gradient d'atmosphère : ne dépend que de darkMode et globeRadius (donc de la
+    // taille de fenêtre). On le recrée seulement quand l'un des deux change, plus à chaque frame.
+    let cachedGradient: CanvasGradient | null = null;
+    let cachedGradientRadius = -1;
+    let cachedGradientDarkMode = darkMode;
 
-    const globePoints: Point3D[] = [];
-    const latSteps = 70;
-    const lonSteps = 120;
-
-    for (let i = 0; i <= latSteps; i++) {
-      const latDeg = -90 + (180 / latSteps) * i;
-      const latRad = (latDeg * Math.PI) / 180;
-      const cosLat = Math.cos(latRad);
-      const sinLat = Math.sin(latRad);
-
-      for (let j = 0; j < lonSteps; j++) {
-        const lonDeg = -180 + (360 / lonSteps) * j;
-        const lonRad = (lonDeg * Math.PI) / 180;
-        const onLand = isLand(latDeg, lonDeg);
-
-        if (!onLand && (i % 4 !== 0 || j % 4 !== 0)) continue;
-
-        const x = cosLat * Math.sin(lonRad);
-        const y = -sinLat;
-        const z = cosLat * Math.cos(lonRad);
-
-        globePoints.push({
-          x, y, z,
-          baseX: x, baseY: y, baseZ: z,
-          size: onLand ? (Math.random() * 1.6 + 1.2) : 0.8,
-          alpha: onLand ? (Math.random() * 0.5 + 0.45) : 0.12,
-          pulse: Math.random() * Math.PI * 2,
-          isLand: onLand,
-        });
-      }
-    }
-
-    const parallels = [-60, -30, 0, 30, 60];
-    const meridians = Array.from({ length: 12 }, (_, idx) => -180 + idx * 30);
-
-    const techHubs = [
-      { name: 'Dakar', lat: 14.7, lon: -17.4 },
-      { name: 'Paris', lat: 48.8, lon: 2.3 },
-      { name: 'New York', lat: 40.7, lon: -74.0 },
-      { name: 'Tokyo', lat: 35.6, lon: 139.6 },
-      { name: 'São Paulo', lat: -23.5, lon: -46.6 },
-      { name: 'Sydney', lat: -33.8, lon: 151.2 },
-      { name: 'Cairo', lat: 30.0, lon: 31.2 },
-      { name: 'London', lat: 51.5, lon: -0.1 },
-    ];
-
-    const arcs: { lat1: number; lon1: number; lat2: number; lon2: number; progress: number; speed: number }[] = [];
-    for (let i = 0; i < techHubs.length; i++) {
-      const h1 = techHubs[i];
-      const h2 = techHubs[(i + 1) % techHubs.length];
-      const h3 = techHubs[(i + 3) % techHubs.length];
-      arcs.push({
-        lat1: h1.lat, lon1: h1.lon,
-        lat2: h2.lat, lon2: h2.lon,
-        progress: Math.random(),
-        speed: 0.004 + Math.random() * 0.006,
-      });
-      arcs.push({
-        lat1: h1.lat, lon1: h1.lon,
-        lat2: h3.lat, lon2: h3.lon,
-        progress: Math.random(),
-        speed: 0.003 + Math.random() * 0.005,
-      });
-    }
+    // Couleurs fixes réutilisées avec ctx.globalAlpha plutôt que de reconstruire une string
+    // "rgba(...)" par point à chaque frame (allocation + parsing évités).
+    const LAND_COLOR = 'rgb(16, 185, 129)';
+    const SEA_COLOR = 'rgb(52, 211, 153)';
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
@@ -157,23 +227,28 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ darkMode
         };
       };
 
-      // Earth Outer Glow
-      const atmosGrad = ctx.createRadialGradient(
-        centerX, centerY, globeRadius * 0.85,
-        centerX, centerY, globeRadius * 1.25
-      );
-      atmosGrad.addColorStop(0, darkMode ? 'rgba(16, 185, 129, 0.12)' : 'rgba(5, 150, 105, 0.08)');
-      atmosGrad.addColorStop(0.5, darkMode ? 'rgba(5, 150, 105, 0.05)' : 'rgba(16, 185, 129, 0.03)');
-      atmosGrad.addColorStop(1, 'rgba(0,0,0,0)');
+      // Earth Outer Glow (mis en cache, recalculé seulement si la taille ou le thème changent)
+      if (!cachedGradient || cachedGradientRadius !== globeRadius || cachedGradientDarkMode !== darkMode) {
+        const atmosGrad = ctx.createRadialGradient(
+          centerX, centerY, globeRadius * 0.85,
+          centerX, centerY, globeRadius * 1.25
+        );
+        atmosGrad.addColorStop(0, darkMode ? 'rgba(16, 185, 129, 0.12)' : 'rgba(5, 150, 105, 0.08)');
+        atmosGrad.addColorStop(0.5, darkMode ? 'rgba(5, 150, 105, 0.05)' : 'rgba(16, 185, 129, 0.03)');
+        atmosGrad.addColorStop(1, 'rgba(0,0,0,0)');
+        cachedGradient = atmosGrad;
+        cachedGradientRadius = globeRadius;
+        cachedGradientDarkMode = darkMode;
+      }
 
       ctx.beginPath();
       ctx.arc(centerX, centerY, globeRadius * 1.25, 0, Math.PI * 2);
-      ctx.fillStyle = atmosGrad;
+      ctx.fillStyle = cachedGradient;
       ctx.fill();
 
       // Latitude Circles
       ctx.lineWidth = 0.5;
-      parallels.forEach((latDeg) => {
+      PARALLELS.forEach((latDeg) => {
         const latRad = (latDeg * Math.PI) / 180;
         const cosLat = Math.cos(latRad);
         const sinLat = Math.sin(latRad);
@@ -202,7 +277,7 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ darkMode
       });
 
       // Longitude Meridians
-      meridians.forEach((lonDeg) => {
+      MERIDIANS.forEach((lonDeg) => {
         const lonRad = (lonDeg * Math.PI) / 180;
         const steps = 90;
 
@@ -232,129 +307,122 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ darkMode
         ctx.stroke();
       });
 
-      // Project & Draw Globe Dots
-      const projectedPoints = globePoints.map((p) => {
+      // Project & Draw Globe Dots — on réutilise le buffer précréé (projectedBuffer) au lieu
+      // de faire un .map() qui allouait un nouveau tableau + de nouveaux objets à chaque frame.
+      for (let idx = 0; idx < globePoints.length; idx++) {
+        const p = globePoints[idx];
         p.pulse += 0.035;
         const proj = project3D(p.baseX, p.baseY, p.baseZ);
-        return { point: p, proj };
-      });
+        const entry = projectedBuffer[idx];
+        entry.sx = proj.sx;
+        entry.sy = proj.sy;
+        entry.z = proj.z;
+        entry.scale = proj.scale;
+      }
 
-      projectedPoints.sort((a, b) => b.proj.z - a.proj.z);
+      projectedBuffer.sort((a, b) => b.z - a.z);
 
-      projectedPoints.forEach(({ point, proj }) => {
-        if (proj.z > globeRadius * 0.25) return;
+      for (let idx = 0; idx < projectedBuffer.length; idx++) {
+        const entry = projectedBuffer[idx];
+        const point = entry.point;
+        if (entry.z > globeRadius * 0.25) continue;
 
-        const depthFade = Math.max(0.05, 1 - (proj.z + globeRadius) / (globeRadius * 1.8));
+        const depthFade = Math.max(0.05, 1 - (entry.z + globeRadius) / (globeRadius * 1.8));
         const pulseAlpha = Math.sin(point.pulse) * 0.15 + point.alpha;
         const alpha = Math.min(1, pulseAlpha * depthFade);
 
-        ctx.beginPath();
-        ctx.arc(proj.sx, proj.sy, point.size * proj.scale, 0, Math.PI * 2);
+        const size = point.size * entry.scale * 2;
 
-        if (point.isLand) {
-          ctx.fillStyle = darkMode
-            ? `rgba(52, 211, 153, ${alpha * 0.95})`
-            : `rgba(16, 185, 129, ${alpha * 0.85})`;
-        } else {
-          ctx.fillStyle = darkMode
-            ? `rgba(20, 184, 166, ${alpha * 0.3})`
-            : `rgba(13, 148, 136, ${alpha * 0.25})`;
-        }
+        ctx.beginPath();
+        ctx.arc(entry.sx, entry.sy, size, 0, Math.PI * 2);
+        ctx.globalAlpha = point.isLand ? alpha * 0.9 : alpha * 0.4;
+        ctx.fillStyle = point.isLand ? LAND_COLOR : SEA_COLOR;
         ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+
+      // Draw Tech Hubs
+      TECH_HUBS.forEach((hub) => {
+        const latRad = (hub.lat * Math.PI) / 180;
+        const lonRad = (hub.lon * Math.PI) / 180;
+        const cosLat = Math.cos(latRad);
+        const sinLat = Math.sin(latRad);
+
+        const bx = cosLat * Math.sin(lonRad);
+        const by = -sinLat;
+        const bz = cosLat * Math.cos(lonRad);
+
+        const proj = project3D(bx, by, bz);
+        if (proj.z > globeRadius * 0.15) return;
+
+        const size = 4 * proj.scale;
+        ctx.beginPath();
+        ctx.arc(proj.sx, proj.sy, size, 0, Math.PI * 2);
+        ctx.fillStyle = darkMode ? 'rgba(6, 182, 212, 0.9)' : 'rgba(6, 182, 212, 0.8)';
+        ctx.fill();
+
+        // Glow ring
+        ctx.beginPath();
+        ctx.arc(proj.sx, proj.sy, size * 2, 0, Math.PI * 2);
+        ctx.strokeStyle = darkMode ? 'rgba(6, 182, 212, 0.4)' : 'rgba(6, 182, 212, 0.3)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
       });
 
-      // Network Arcs
+      // Draw Animated Arcs — la géométrie (x1,y1,z1,x2,y2,z2,dot,angle,ux,uy,uz) est déjà
+      // précalculée dans `arcs` (useMemo) ; ici on ne fait plus que l'avancer et projeter.
       arcs.forEach((arc) => {
-        const lat1R = (arc.lat1 * Math.PI) / 180;
-        const lon1R = (arc.lon1 * Math.PI) / 180;
-        const lat2R = (arc.lat2 * Math.PI) / 180;
-        const lon2R = (arc.lon2 * Math.PI) / 180;
+        arc.progress += arc.speed;
+        if (arc.progress > 1) arc.progress = 0;
 
-        const bx1 = Math.cos(lat1R) * Math.sin(lon1R);
-        const by1 = -Math.sin(lat1R);
-        const bz1 = Math.cos(lat1R) * Math.cos(lon1R);
+        const proj1 = project3D(arc.x1, arc.y1, arc.z1, 15);
+        const proj2 = project3D(arc.x2, arc.y2, arc.z2, 15);
 
-        const bx2 = Math.cos(lat2R) * Math.sin(lon2R);
-        const by2 = -Math.sin(lat2R);
-        const bz2 = Math.cos(lat2R) * Math.cos(lon2R);
+        if (proj1.z > globeRadius * 0.1 || proj2.z > globeRadius * 0.1) return;
 
-        const p1 = project3D(bx1, by1, bz1);
-        const p2 = project3D(bx2, by2, bz2);
+        const steps = 30;
+        ctx.beginPath();
+        for (let s = 0; s <= steps; s++) {
+          const t = (s / steps) * arc.progress;
+          const theta = t * arc.angle;
 
-        if (p1.z < globeRadius * 0.1 || p2.z < globeRadius * 0.1) {
-          ctx.beginPath();
-          ctx.moveTo(p1.sx, p1.sy);
+          const sinTheta = Math.sin(theta);
+          const cosTheta = Math.cos(theta);
 
-          const midLat = (arc.lat1 + arc.lat2) / 2;
-          const midLon = (arc.lon1 + arc.lon2) / 2;
-          const midLatR = (midLat * Math.PI) / 180;
-          const midLonR = (midLon * Math.PI) / 180;
-          const bxM = Math.cos(midLatR) * Math.sin(midLonR);
-          const byM = -Math.sin(midLatR);
-          const bzM = Math.cos(midLatR) * Math.cos(midLonR);
+          const ix = arc.x1 * cosTheta + arc.ux * sinTheta;
+          const iy = arc.y1 * cosTheta + arc.uy * sinTheta;
+          const iz = arc.z1 * cosTheta + arc.uz * sinTheta;
 
-          const midProj = project3D(bxM, byM, bzM, globeRadius * 0.15);
+          const proj = project3D(ix, iy, iz, 15);
+          if (proj.z > globeRadius * 0.1) continue;
 
-          ctx.quadraticCurveTo(midProj.sx, midProj.sy, p2.sx, p2.sy);
-          ctx.strokeStyle = darkMode ? 'rgba(52, 211, 153, 0.25)' : 'rgba(16, 185, 129, 0.25)';
-          ctx.lineWidth = 1.2;
-          ctx.stroke();
-
-          arc.progress += arc.speed;
-          if (arc.progress > 1) arc.progress = 0;
-
-          const t = arc.progress;
-          const pulseX = (1 - t) * (1 - t) * p1.sx + 2 * (1 - t) * t * midProj.sx + t * t * p2.sx;
-          const pulseY = (1 - t) * (1 - t) * p1.sy + 2 * (1 - t) * t * midProj.sy + t * t * p2.sy;
-
-          ctx.beginPath();
-          ctx.arc(pulseX, pulseY, 3, 0, Math.PI * 2);
-          ctx.fillStyle = darkMode ? 'rgba(110, 231, 183, 0.95)' : 'rgba(5, 150, 105, 0.95)';
-          ctx.fill();
+          if (s === 0) {
+            ctx.moveTo(proj.sx, proj.sy);
+          } else {
+            ctx.lineTo(proj.sx, proj.sy);
+          }
         }
+        ctx.strokeStyle = darkMode ? 'rgba(6, 182, 212, 0.3)' : 'rgba(6, 182, 212, 0.25)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
       });
 
       animationFrameId = requestAnimationFrame(render);
     };
 
-    animationFrameId = requestAnimationFrame(render);
+    render();
 
     return () => {
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [darkMode]);
+  }, [darkMode, globePoints, arcs, projectedBuffer]);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Atmosphere Glow Gradients */}
-      <div
-        className={`absolute top-[-10%] right-[10%] w-[700px] h-[700px] rounded-full blur-[160px] transition-colors duration-1000 ${
-          darkMode ? 'bg-emerald-950/45' : 'bg-emerald-200/40'
-        }`}
-      />
-      <div
-        className={`absolute top-[30%] left-[-15%] w-[650px] h-[650px] rounded-full blur-[170px] transition-colors duration-1000 ${
-          darkMode ? 'bg-teal-950/35' : 'bg-teal-100/35'
-        }`}
-      />
-      <div
-        className={`absolute bottom-[-10%] right-[15%] w-[600px] h-[600px] rounded-full blur-[150px] transition-colors duration-1000 ${
-          darkMode ? 'bg-green-950/40' : 'bg-green-100/30'
-        }`}
-      />
-
-      {/* Grid Pattern Overlay */}
-      <div
-        className={`absolute inset-0 opacity-[0.03] ${
-          darkMode
-            ? 'bg-[radial-gradient(#34d399_1px,transparent_1px)]'
-            : 'bg-[radial-gradient(#059669_1px,transparent_1px)]'
-        } [background-size:32px_32px]`}
-      />
-
-      {/* 3D Rotating Earth Background Canvas */}
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-80" />
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-0"
+      style={{ opacity: darkMode ? 0.6 : 0.4 }}
+    />
   );
 };

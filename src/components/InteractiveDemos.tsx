@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Play, Check, X, Sparkles, Send, PhoneCall, RefreshCw, Calculator, HelpCircle, Activity, ExternalLink } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
-interface KaFarmCalculatorProps {
-  darkMode: boolean;
-}
-
-export const KaFarmCalculator: React.FC<KaFarmCalculatorProps> = ({ darkMode }) => {
+export const KaFarmCalculator: React.FC = () => {
+  const { darkMode } = useTheme();
   const [crop, setCrop] = useState('Oignons');
   const [hectares, setHectares] = useState(2);
 
@@ -81,7 +79,8 @@ export const KaFarmCalculator: React.FC<KaFarmCalculatorProps> = ({ darkMode }) 
   );
 };
 
-export const SunuJobSimulator: React.FC<SunuJobSimulatorProps> = ({ darkMode }) => {
+export const SunuJobSimulator: React.FC = () => {
+  const { darkMode } = useTheme();
   const [district, setDistrict] = useState('Pikine');
   const [service, setService] = useState('Plombier');
   const [booked, setBooked] = useState(false);
@@ -167,11 +166,8 @@ export const SunuJobSimulator: React.FC<SunuJobSimulatorProps> = ({ darkMode }) 
   );
 };
 
-interface SunuJobSimulatorProps {
-  darkMode: boolean;
-}
-
-export const PlayableCssQuiz: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
+export const PlayableCssQuiz: React.FC = () => {
+  const { darkMode } = useTheme();
   const questions = [
     {
       question: "Comment centrer parfaitement un élément avec CSS Flexbox ?",
@@ -330,7 +326,8 @@ export const PlayableCssQuiz: React.FC<{ darkMode: boolean }> = ({ darkMode }) =
   );
 };
 
-export const FitPulsePreview: React.FC<{ darkMode: boolean }> = ({ darkMode }) => {
+export const FitPulsePreview: React.FC = () => {
+  const { darkMode } = useTheme();
   const [steps, setSteps] = useState(8420);
   const [calories, setCalories] = useState(490);
 

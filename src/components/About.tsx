@@ -2,12 +2,10 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { User, MapPin, Heart, BookOpen, Users, Sparkles, CheckCircle2, Globe2, Award } from 'lucide-react';
 import { userProfile } from '../data/portfolioData';
+import { useTheme } from '../contexts/ThemeContext';
 
-interface AboutProps {
-  darkMode: boolean;
-}
-
-export const About: React.FC<AboutProps> = ({ darkMode }) => {
+export const About = React.memo(() => {
+  const { darkMode } = useTheme();
   return (
     <motion.section
       id="about"
@@ -39,10 +37,9 @@ export const About: React.FC<AboutProps> = ({ darkMode }) => {
         </div>
 
         {/* Bio Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          
-          {/* Left Column: Dakar Card & Bio */}
-          <div className="lg:col-span-7 space-y-6">
+        <div className="flex justify-center">
+          {/* Centered Profile Card */}
+          <div className="w-full max-w-3xl space-y-6">
             <div className={`p-6 sm:p-8 rounded-3xl border backdrop-blur-md relative overflow-hidden transition-all shadow-xl ${
               darkMode
                 ? 'bg-[#041a12]/40 border-emerald-500/20 shadow-emerald-950/20'
@@ -130,4 +127,4 @@ export const About: React.FC<AboutProps> = ({ darkMode }) => {
       </div>
     </motion.section>
   );
-};
+});

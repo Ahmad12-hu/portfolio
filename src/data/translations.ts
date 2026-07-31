@@ -13,7 +13,7 @@ export const translations = {
     // Hero
     subtitle: 'Jeune polyvalent & autodidacte',
     autodidact: 'Autodidacte',
-    location: 'Dakar',
+    heroLocation: 'Dakar',
     country: 'Sénégal 🇸🇳',
     bio: 'Bonjour, je suis Amadou Ka, développeur web en apprentissage (1 an et quelques mois) basé à Dakar. Passionné d\'innovation numérique, je conçois des solutions digitales concrètes et autonomes.',
     
@@ -103,7 +103,7 @@ export const translations = {
     // Hero
     subtitle: 'Young versatile & self-taught',
     autodidact: 'Self-taught',
-    location: 'Dakar',
+    heroLocation: 'Dakar',
     country: 'Senegal 🇸🇳',
     bio: 'Hello, I\'m Amadou Ka, a web developer in training (1 year and a few months) based in Dakar. Passionate about digital innovation, I design concrete and autonomous digital solutions.',
     

@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Cpu, Code2, Database, Wrench, HeartHandshake, CheckCircle2, Award } from 'lucide-react';
 import { skillCategories } from '../data/portfolioData';
+import { useTheme } from '../contexts/ThemeContext';
 
-interface SkillsProps {
-  darkMode: boolean;
-}
-
-export const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
+export const Skills = React.memo(() => {
+  const { darkMode } = useTheme();
   const [selectedFilter, setSelectedFilter] = useState<string>('Tous');
 
   const filterOptions = ['Tous', 'Langages', 'Frameworks', 'Outils', 'Soft Skills'];
@@ -221,5 +219,5 @@ export const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
       </div>
     </motion.section>
   );
-};
+});
 

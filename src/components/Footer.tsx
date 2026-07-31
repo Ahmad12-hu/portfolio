@@ -1,12 +1,10 @@
 import React from 'react';
 import { ArrowUp, Github, Linkedin, Mail, Twitter, Facebook, MapPin, Heart } from 'lucide-react';
 import { userProfile } from '../data/portfolioData';
+import { useTheme } from '../contexts/ThemeContext';
 
-interface FooterProps {
-  darkMode: boolean;
-}
-
-export const Footer: React.FC<FooterProps> = ({ darkMode }) => {
+export const Footer = React.memo(() => {
+  const { darkMode } = useTheme();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -99,4 +97,4 @@ export const Footer: React.FC<FooterProps> = ({ darkMode }) => {
       </div>
     </footer>
   );
-};
+});
