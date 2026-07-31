@@ -102,9 +102,13 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
                 src={getAvatarSrc(currentProfile)}
                 alt={currentProfile.name}
                 loading="eager"
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-emerald-400/60 shadow-xl shadow-emerald-900/20 bg-slate-900/40"
+                className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-emerald-400/60 shadow-xl ${
+                  darkMode ? 'shadow-emerald-900/20 bg-slate-900/40' : 'shadow-emerald-200 bg-white'
+                }`}
               />
-              <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 border-[#03140d] dark:border-slate-950" />
+              <span className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 ${
+                darkMode ? 'border-slate-950' : 'border-white'
+              }`} />
             </div>
             <div>
               <h2 className={`text-sm sm:text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>{currentProfile.name}</h2>

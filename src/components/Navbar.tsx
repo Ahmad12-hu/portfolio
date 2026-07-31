@@ -43,11 +43,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCv, onOpenEditProfile }) =
   }, []);
 
   const navLinks = [
-    { name: lang === 'FR' ? 'Accueil' : 'Home', href: '#hero' },
-    { name: lang === 'FR' ? 'À propos' : 'About', href: '#about' },
-    { name: lang === 'FR' ? 'Projets' : 'Projects', href: '#projects' },
-    { name: lang === 'FR' ? 'Compétences' : 'Skills', href: '#skills' },
-    { name: lang === 'FR' ? 'Contact' : 'Contact', href: '#contact' },
+    { name: lang === 'fr' ? 'Accueil' : 'Home', href: '#hero' },
+    { name: lang === 'fr' ? 'À propos' : 'About', href: '#about' },
+    { name: lang === 'fr' ? 'Projets' : 'Projects', href: '#projects' },
+    { name: lang === 'fr' ? 'Compétences' : 'Skills', href: '#skills' },
+    { name: lang === 'fr' ? 'Contact' : 'Contact', href: '#contact' },
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -79,8 +79,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCv, onOpenEditProfile }) =
           className="flex items-center gap-2 group focus:outline-none"
           id="logo-link"
         >
-          <span className="text-xl sm:text-2xl font-black tracking-wider text-white font-mono">
-            MON_PORTFOLIO<span className="text-emerald-400">.</span>
+          <span className={`text-xl sm:text-2xl font-black tracking-wider font-mono ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+            MON_PORTFOLIO<span className="text-emerald-500">.</span>
           </span>
         </a>
 

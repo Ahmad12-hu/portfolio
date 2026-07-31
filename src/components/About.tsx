@@ -87,41 +87,41 @@ export const About = React.memo(() => {
             </div>
 
             {/* Values / Pillars */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className={`p-4 rounded-2xl border text-center space-y-2 backdrop-blur-md transition-all ${
-                darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200'
-              }`}>
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/20">
-                  <CheckCircle2 className="w-5 h-5" />
+            <div className="flex justify-center">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl">
+                <div className={`p-4 rounded-2xl border text-center space-y-2 backdrop-blur-md transition-all ${
+                  darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200'
+                }`}>
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/20">
+                    <CheckCircle2 className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-xs font-bold">Code Propre & Utile</h4>
+                  <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-600'}`}>Composants réutilisables, lisibles et optimisés.</p>
                 </div>
-                <h4 className="text-xs font-bold">Code Propre & Utile</h4>
-                <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-600'}`}>Composants réutilisables, lisibles et optimisés.</p>
-              </div>
 
-              <div className={`p-4 rounded-2xl border text-center space-y-2 backdrop-blur-md transition-all ${
-                darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200'
-              }`}>
-                <div className="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center mx-auto border border-teal-500/20">
-                  <Heart className="w-5 h-5" />
+                <div className={`p-4 rounded-2xl border text-center space-y-2 backdrop-blur-md transition-all ${
+                  darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200'
+                }`}>
+                  <div className="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center mx-auto border border-teal-500/20">
+                    <Heart className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-xs font-bold">Projets Utiles</h4>
+                  <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-600'}`}>Agri-Tech Intelligente avec KA-Farm.</p>
                 </div>
-                <h4 className="text-xs font-bold">Projets Utiles</h4>
-                <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-600'}`}>Agri-Tech Intelligente avec KA-Farm.</p>
-              </div>
 
-              <div className={`p-4 rounded-2xl border text-center space-y-2 backdrop-blur-md transition-all ${
-                darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200'
-              }`}>
-                <div className="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mx-auto border border-cyan-500/20">
-                  <Award className="w-5 h-5" />
+                <div className={`p-4 rounded-2xl border text-center space-y-2 backdrop-blur-md transition-all ${
+                  darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200'
+                }`}>
+                  <div className="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mx-auto border border-cyan-500/20">
+                    <Award className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-xs font-bold">Esprit d'Équipe</h4>
+                  <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-600'}`}>Co-développement familial et partage open source.</p>
                 </div>
-                <h4 className="text-xs font-bold">Esprit d'Équipe</h4>
-                <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-600'}`}>Co-développement familial et partage open source.</p>
               </div>
             </div>
 
           </div>
-
-
         </div>
 
       </div>
