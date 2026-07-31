@@ -14,7 +14,6 @@ interface Point3D {
   isLand: boolean;
 }
 
-// Structure réutilisée chaque frame pour éviter de recréer des objets/tableaux
 interface ProjectedEntry {
   point: Point3D;
   sx: number;
@@ -23,7 +22,6 @@ interface ProjectedEntry {
   scale: number;
 }
 
-// Données géométriques d'un arc, précalculées une seule fois (ne dépendent pas du temps)
 interface ArcGeometry {
   x1: number; y1: number; z1: number;
   x2: number; y2: number; z2: number;
@@ -34,7 +32,6 @@ interface ArcGeometry {
   speed: number;
 }
 
-// Memoize static data
 const LAT_STEPS = 70;
 const LON_STEPS = 120;
 const PARALLELS = [-60, -30, 0, 30, 60];
@@ -51,14 +48,14 @@ const TECH_HUBS = [
 ];
 
 const isLand = (lat: number, lon: number): boolean => {
-  if (lat >= -35 && lat <= 37 && lon >= -18 && lon <= 52) return true; // Africa
-  if (lat >= 36 && lat <= 71 && lon >= -10 && lon <= 42) return true; // Europe
-  if (lat >= 5 && lat <= 75 && lon >= 42 && lon <= 180) return true; // Asia
-  if (lat >= 12 && lat <= 75 && lon >= -168 && lon <= -52) return true; // N. America
-  if (lat >= -56 && lat <= 13 && lon >= -82 && lon <= -34) return true; // S. America
-  if (lat >= -45 && lat <= -10 && lon >= 110 && lon <= 178) return true; // Australia
-  if (lat >= 60 && lat <= 83 && lon >= -75 && lon <= -12) return true; // Greenland
-  if (lat <= -65) return true; // Antarctica
+  if (lat >= -35 && lat <= 37 && lon >= -18 && lon <= 52) return true;
+  if (lat >= 36 && lat <= 71 && lon >= -10 && lon <= 42) return true;
+  if (lat >= 5 && lat <= 75 && lon >= 42 && lon <= 180) return true;
+  if (lat >= 12 && lat <= 75 && lon >= -168 && lon <= -52) return true;
+  if (lat >= -56 && lat <= 13 && lon >= -82 && lon <= -34) return true;
+  if (lat >= -45 && lat <= -10 && lon >= 110 && lon <= 178) return true;
+  if (lat >= 60 && lat <= 83 && lon >= -75 && lon <= -12) return true;
+  if (lat <= -65) return true;
   return false;
 };
 
@@ -66,7 +63,6 @@ export const AnimatedBackground: React.FC = () => {
   const { darkMode } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  // Memoize globe points generation
   const globePoints = useMemo<Point3D[]>(() => {
     const points: Point3D[] = [];
     for (let i = 0; i <= LAT_STEPS; i++) {
@@ -99,16 +95,11 @@ export const AnimatedBackground: React.FC = () => {
     return points;
   }, []);
 
-  // Buffer réutilisé chaque frame pour la projection + le tri (évite l'allocation d'un
-  // nouveau tableau/objets à chaque frame comme le faisait le .map() d'origine)
   const projectedBuffer = useMemo<ProjectedEntry[]>(
     () => globePoints.map((p) => ({ point: p, sx: 0, sy: 0, z: 0, scale: 0 })),
     [globePoints]
   );
 
-  // Memoize arcs generation — la géométrie du grand cercle (x1,y1,z1,x2,y2,z2,dot,angle,u*)
-  // ne dépend que des coordonnées des hubs, qui ne changent jamais : on la calcule une seule
-  // fois ici au lieu de refaire tous les sin/cos/acos à chaque frame comme avant.
   const arcs = useMemo<ArcGeometry[]>(() => {
     const toVec = (lat: number, lon: number) => {
       const latRad = (lat * Math.PI) / 180;
@@ -131,7 +122,7 @@ export const AnimatedBackground: React.FC = () => {
       const v2 = toVec(h2.lat, h2.lon);
       const dot = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
       const angle = Math.acos(Math.max(-1, Math.min(1, dot)));
-      const sinAngle = Math.sin(angle) || 1e-6; // évite une division par zéro
+      const sinAngle = Math.sin(angle) || 1e-6;
       const ux = (v2.x - v1.x * dot) / sinAngle;
       const uy = (v2.y - v1.y * dot) / sinAngle;
       const uz = (v2.z - v1.z * dot) / sinAngle;
@@ -171,24 +162,21 @@ export const AnimatedBackground: React.FC = () => {
       if (!canvas) return;
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-      cachedGradient = null; // le rayon change avec la taille, on regénère le gradient
+      cachedGradient = null;
     };
 
     window.addEventListener('resize', handleResize);
 
-    let rotationY = 0.5;
-    const rotationX = 0.38;
+    let rotationY = 0.45;
+    const rotationX = 0.35;
 
-    // Cache du gradient d'atmosphère : ne dépend que de darkMode et globeRadius (donc de la
-    // taille de fenêtre). On le recrée seulement quand l'un des deux change, plus à chaque frame.
     let cachedGradient: CanvasGradient | null = null;
     let cachedGradientRadius = -1;
     let cachedGradientDarkMode = darkMode;
 
-    // Couleurs fixes réutilisées avec ctx.globalAlpha plutôt que de reconstruire une string
-    // "rgba(...)" par point à chaque frame (allocation + parsing évités).
-    const LAND_COLOR = 'rgb(16, 185, 129)';
-    const SEA_COLOR = 'rgb(52, 211, 153)';
+    // Couleurs naturelles, terre et vegetation, sans effet plastique
+    const LAND_COLOR = 'rgb(34, 120, 85)';
+    const SEA_COLOR = 'rgb(45, 100, 130)';
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
@@ -197,7 +185,7 @@ export const AnimatedBackground: React.FC = () => {
       const centerX = width * 0.5;
       const centerY = height * 0.5;
 
-      rotationY += 0.0025;
+      rotationY += 0.0015;
 
       const cosY = Math.cos(rotationY);
       const sinY = Math.sin(rotationY);
@@ -227,7 +215,6 @@ export const AnimatedBackground: React.FC = () => {
         };
       };
 
-      // Earth Outer Glow (mis en cache, recalculé seulement si la taille ou le thème changent)
       if (!cachedGradient || cachedGradientRadius !== globeRadius || cachedGradientDarkMode !== darkMode) {
         const atmosGrad = ctx.createRadialGradient(
           centerX, centerY, globeRadius * 0.85,
@@ -246,7 +233,6 @@ export const AnimatedBackground: React.FC = () => {
       ctx.fillStyle = cachedGradient;
       ctx.fill();
 
-      // Latitude Circles
       ctx.lineWidth = 0.5;
       PARALLELS.forEach((latDeg) => {
         const latRad = (latDeg * Math.PI) / 180;
@@ -272,11 +258,10 @@ export const AnimatedBackground: React.FC = () => {
             ctx.lineTo(proj.sx, proj.sy);
           }
         }
-        ctx.strokeStyle = darkMode ? 'rgba(52, 211, 153, 0.07)' : 'rgba(5, 150, 105, 0.08)';
+        ctx.strokeStyle = darkMode ? 'rgba(120, 180, 140, 0.12)' : 'rgba(60, 130, 100, 0.1)';
         ctx.stroke();
       });
 
-      // Longitude Meridians
       MERIDIANS.forEach((lonDeg) => {
         const lonRad = (lonDeg * Math.PI) / 180;
         const steps = 90;
@@ -303,12 +288,10 @@ export const AnimatedBackground: React.FC = () => {
             ctx.lineTo(proj.sx, proj.sy);
           }
         }
-        ctx.strokeStyle = darkMode ? 'rgba(52, 211, 153, 0.06)' : 'rgba(5, 150, 105, 0.07)';
+        ctx.strokeStyle = darkMode ? 'rgba(120, 180, 140, 0.1)' : 'rgba(60, 130, 100, 0.08)';
         ctx.stroke();
       });
 
-      // Project & Draw Globe Dots — on réutilise le buffer précréé (projectedBuffer) au lieu
-      // de faire un .map() qui allouait un nouveau tableau + de nouveaux objets à chaque frame.
       for (let idx = 0; idx < globePoints.length; idx++) {
         const p = globePoints[idx];
         p.pulse += 0.035;
@@ -341,7 +324,6 @@ export const AnimatedBackground: React.FC = () => {
       }
       ctx.globalAlpha = 1;
 
-      // Draw Tech Hubs
       TECH_HUBS.forEach((hub) => {
         const latRad = (hub.lat * Math.PI) / 180;
         const lonRad = (hub.lon * Math.PI) / 180;
@@ -358,19 +340,16 @@ export const AnimatedBackground: React.FC = () => {
         const size = 4 * proj.scale;
         ctx.beginPath();
         ctx.arc(proj.sx, proj.sy, size, 0, Math.PI * 2);
-        ctx.fillStyle = darkMode ? 'rgba(6, 182, 212, 0.9)' : 'rgba(6, 182, 212, 0.8)';
+        ctx.fillStyle = darkMode ? 'rgba(100, 160, 200, 0.85)' : 'rgba(70, 130, 170, 0.7)';
         ctx.fill();
 
-        // Glow ring
         ctx.beginPath();
         ctx.arc(proj.sx, proj.sy, size * 2, 0, Math.PI * 2);
-        ctx.strokeStyle = darkMode ? 'rgba(6, 182, 212, 0.4)' : 'rgba(6, 182, 212, 0.3)';
+        ctx.strokeStyle = darkMode ? 'rgba(100, 160, 200, 0.35)' : 'rgba(70, 130, 170, 0.25)';
         ctx.lineWidth = 1;
         ctx.stroke();
       });
 
-      // Draw Animated Arcs — la géométrie (x1,y1,z1,x2,y2,z2,dot,angle,ux,uy,uz) est déjà
-      // précalculée dans `arcs` (useMemo) ; ici on ne fait plus que l'avancer et projeter.
       arcs.forEach((arc) => {
         arc.progress += arc.speed;
         if (arc.progress > 1) arc.progress = 0;
@@ -402,7 +381,7 @@ export const AnimatedBackground: React.FC = () => {
             ctx.lineTo(proj.sx, proj.sy);
           }
         }
-        ctx.strokeStyle = darkMode ? 'rgba(6, 182, 212, 0.3)' : 'rgba(6, 182, 212, 0.25)';
+        ctx.strokeStyle = darkMode ? 'rgba(80, 140, 180, 0.3)' : 'rgba(60, 110, 150, 0.2)';
         ctx.lineWidth = 1.5;
         ctx.stroke();
       });
