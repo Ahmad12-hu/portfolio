@@ -76,23 +76,18 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
           
           {/* Subtitle Pill & Status Badges */}
           <div className="flex flex-wrap items-center gap-3">
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-xs font-mono backdrop-blur-md shadow-lg shadow-emerald-500/10">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-              </span>
-              <span className="text-emerald-200 font-extrabold uppercase tracking-widest">
-                {currentProfile.subtitle || 'Jeune polyvalent'}
-              </span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100/90 border border-emerald-300/50 text-emerald-900 text-xs font-mono font-semibold">
+              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>{currentProfile.subtitle || 'Jeune polyvalent'}</span>
             </div>
 
-            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-teal-500/20 border border-teal-500/50 text-teal-100 text-xs font-mono font-bold backdrop-blur-md shadow-lg shadow-teal-500/10">
-              <Award className="w-4 h-4 text-teal-300" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-100/90 border border-teal-300/50 text-teal-900 text-xs font-mono font-semibold">
+              <Award className="w-3.5 h-3.5 text-teal-600" />
               <span>Autodidacte ({currentProfile.stats.experienceYears})</span>
             </div>
 
-            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-cyan-500/20 border border-cyan-500/50 text-cyan-100 text-xs font-mono font-bold backdrop-blur-md shadow-lg shadow-cyan-500/10">
-              <MapPin className="w-4 h-4 text-cyan-300" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-300/50 text-sky-900 text-xs font-mono font-semibold">
+              <MapPin className="w-3.5 h-3.5 text-sky-600" />
               <span>{currentProfile.location}, {currentProfile.country}</span>
             </div>
           </div>
