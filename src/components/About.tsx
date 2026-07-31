@@ -62,7 +62,7 @@ export const About = React.memo(() => {
                   {userProfile.detailedBio}
                 </p>
 
-                <div className="pt-4 border-t border-emerald-500/20 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="pt-4 border-t border-emerald-500/20">
                   <div className="flex items-start gap-3">
                     <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 mt-1 border border-emerald-500/20">
                       <BookOpen className="w-4 h-4" />
@@ -70,16 +70,6 @@ export const About = React.memo(() => {
                     <div>
                       <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400">Auto-formation</h4>
                       <p className={`text-xs font-medium ${darkMode ? 'text-emerald-100/85' : 'text-slate-600'}`}>Parcours structuré sur freeCodeCamp, documentation officielle et projets concrets.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-xl bg-teal-500/10 text-teal-400 mt-1 border border-teal-500/20">
-                      <Users className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-teal-400">Engagé</h4>
-                      <p className={`text-xs font-medium ${darkMode ? 'text-emerald-100/85' : 'text-slate-600'}`}>Animation active de la communauté WhatsApp de partage dev au Sénégal.</p>
                     </div>
                   </div>
                 </div>
