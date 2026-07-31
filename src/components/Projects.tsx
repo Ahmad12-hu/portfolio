@@ -136,6 +136,7 @@ export const Projects: React.FC<ProjectsProps> = ({ darkMode, onSelectProject })
                     <img
                       src={project.image}
                       alt={project.title}
+                      loading="lazy"
                       className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#03140d] via-transparent to-transparent opacity-80" />
