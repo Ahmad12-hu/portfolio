@@ -74,7 +74,7 @@ export default function App() {
 
   return (
     <div className={`min-h-screen relative transition-colors duration-300 font-sans selection:bg-emerald-500 selection:text-slate-950 ${
-      darkMode ? 'bg-[#03140d] text-slate-100' : 'bg-slate-50 text-slate-900'
+      darkMode ? 'bg-[#03140d] text-slate-100' : 'bg-[#f5f5f0] text-slate-900'
     }`}>
       <AnimatedBackground />
 

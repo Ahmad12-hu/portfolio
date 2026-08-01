@@ -76,17 +76,17 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
           
           {/* Subtitle Pill & Status Badges */}
           <div className="flex flex-wrap items-center gap-3">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100/90 border border-emerald-300/50 text-emerald-900 text-xs font-mono font-semibold">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100/80 border border-emerald-300/60 text-emerald-900 text-xs font-mono font-semibold">
               <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
               <span>{currentProfile.subtitle || 'Jeune polyvalent'}</span>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-100/90 border border-teal-300/50 text-teal-900 text-xs font-mono font-semibold">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-100/80 border border-teal-300/60 text-teal-900 text-xs font-mono font-semibold">
               <Award className="w-3.5 h-3.5 text-teal-600" />
               <span>Autodidacte ({currentProfile.stats.experienceYears})</span>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/90 border border-sky-300/50 text-sky-900 text-xs font-mono font-semibold">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/80 border border-sky-300/60 text-sky-900 text-xs font-mono font-semibold">
               <MapPin className="w-3.5 h-3.5 text-sky-600" />
               <span>{currentProfile.location}, {currentProfile.country}</span>
             </div>
@@ -100,7 +100,7 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
                 alt={currentProfile.name}
                 loading="eager"
                 className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-emerald-400/60 shadow-xl ${
-                  darkMode ? 'shadow-emerald-900/20 bg-slate-900/40' : 'shadow-emerald-200 bg-white'
+                  darkMode ? 'shadow-emerald-900/20 bg-slate-900/40' : 'shadow-emerald-200 bg-[#f5f5f0]'
                 }`}
               />
               <span className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 ${
@@ -159,7 +159,7 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
               className={`flex items-center gap-2.5 px-5 sm:px-7 py-3 sm:py-4 rounded-2xl border font-bold text-xs sm:text-sm transition-all duration-300 hover:scale-105 backdrop-blur-md ${
                 darkMode
                   ? 'bg-[#041a12]/80 border-emerald-500/30 text-emerald-200 hover:text-white hover:bg-emerald-900/40'
-                  : 'bg-white/90 border-emerald-200 text-slate-800 hover:bg-emerald-50'
+                  : 'bg-white/95 border-emerald-300 text-slate-800 hover:bg-emerald-50'
               }`}
               id="hero-cv-btn"
             >
@@ -169,7 +169,7 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
           </div>
 
           {/* Social Icons */}
-          <div className="pt-6 border-t border-emerald-500/20 flex items-center gap-4 text-xs sm:text-sm text-emerald-200/70">
+          <div className="pt-6 border-t border-emerald-500/25 flex items-center gap-4 text-xs sm:text-sm text-emerald-200/70">
             <span className="font-mono font-medium">Réseaux :</span>
             <div className="flex items-center gap-2.5">
               <a
@@ -177,7 +177,7 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`w-10 h-10 rounded-2xl border flex items-center justify-center transition-all shadow-sm backdrop-blur-md ${
-                  darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-emerald-200 text-slate-700 hover:text-emerald-600'
+                  darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-emerald-300 text-slate-700 hover:text-emerald-600'
                 }`}
                 title="LinkedIn"
                 id="linkedin-social-link"
@@ -189,7 +189,7 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`w-10 h-10 rounded-2xl border flex items-center justify-center transition-all shadow-sm backdrop-blur-md ${
-                  darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-emerald-200 text-slate-700 hover:text-emerald-600'
+                  darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-emerald-300 text-slate-700 hover:text-emerald-600'
                 }`}
                 title="Twitter / X"
                 id="twitter-social-link"
@@ -201,7 +201,7 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`w-10 h-10 rounded-2xl border flex items-center justify-center transition-all shadow-sm backdrop-blur-md ${
-                  darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-emerald-200 text-slate-700 hover:text-emerald-600'
+                  darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-emerald-300 text-slate-700 hover:text-emerald-600'
                 }`}
                 title="GitHub"
                 id="github-social-link"
@@ -213,7 +213,7 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`w-10 h-10 rounded-2xl border flex items-center justify-center transition-all shadow-sm backdrop-blur-md ${
-                  darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-emerald-200 text-slate-700 hover:text-emerald-600'
+                  darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-emerald-300 text-slate-700 hover:text-emerald-600'
                 }`}
                 title="Facebook"
                 id="facebook-social-link"
