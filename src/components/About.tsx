@@ -63,11 +63,11 @@ export const About = React.memo(() => {
                 </p>
 
                 <div className="pt-4 border-t border-emerald-500/20">
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 mt-1 border border-emerald-500/20">
+                  <div className="flex items-center gap-3 max-w-2xl mx-auto">
+                    <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
                       <BookOpen className="w-4 h-4" />
                     </div>
-                    <div>
+                    <div className="text-left">
                       <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400">Auto-formation</h4>
                       <p className={`text-xs font-medium ${darkMode ? 'text-emerald-100/85' : 'text-slate-600'}`}>Parcours structuré sur freeCodeCamp, documentation officielle et projets concrets.</p>
                     </div>
