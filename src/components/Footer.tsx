@@ -11,7 +11,7 @@ export const Footer = React.memo(() => {
 
   return (
     <footer className={`border-t py-8 sm:py-12 transition-colors duration-300 ${
-      darkMode ? 'bg-transparent border-emerald-500/20 text-emerald-200/70' : 'bg-slate-50 border-emerald-900/30 text-slate-600'
+      darkMode ? 'bg-transparent border-emerald-500/20 text-emerald-200/70' : 'bg-[#f5f5f0] border-emerald-200 text-slate-600'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 pb-6 sm:pb-8 border-b border-emerald-500/20">
@@ -44,7 +44,7 @@ export const Footer = React.memo(() => {
               href={userProfile.twitter || 'https://twitter.com'}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 sm:p-2.5 rounded-xl bg-[#041a12]/80 border border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50 transition-all"
+              className={`p-2 sm:p-2.5 rounded-xl border transition-all ${darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-emerald-300 text-slate-600 hover:text-emerald-600 hover:border-emerald-400'}`}
               title="Twitter / X"
               id="footer-twitter-link"
             >
