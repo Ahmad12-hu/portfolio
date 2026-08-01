@@ -13,9 +13,9 @@ export const About = React.memo(() => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`py-20 relative transition-colors duration-300 ${
-        darkMode ? 'bg-transparent text-emerald-50' : 'bg-[#f0f7f4]/40 text-slate-900'
-      }`}
+       className={`py-20 relative transition-colors duration-300 ${
+         darkMode ? 'bg-transparent text-emerald-50' : 'bg-[#f5f5f0] text-slate-900'
+       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -40,11 +40,11 @@ export const About = React.memo(() => {
         <div className="flex justify-center">
           {/* Centered Profile Card */}
           <div className="w-full max-w-3xl space-y-6">
-            <div className={`p-6 sm:p-8 rounded-3xl border backdrop-blur-md relative overflow-hidden transition-all shadow-xl ${
-              darkMode
-                ? 'bg-[#041a12]/40 border-emerald-500/20 shadow-emerald-950/20'
-                : 'bg-white/80 border-emerald-200 shadow-slate-200/50'
-            }`}>
+             <div className={`p-6 sm:p-8 rounded-3xl border backdrop-blur-md relative overflow-hidden transition-all shadow-xl ${
+               darkMode
+                 ? 'bg-[#041a12]/40 border-emerald-500/20 shadow-emerald-950/20'
+                 : 'bg-white border-emerald-200 shadow-slate-200/60'
+             }`}>
               <div className="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
                 <Globe2 className="w-24 sm:w-40 h-24 sm:h-40 text-emerald-400" />
               </div>
