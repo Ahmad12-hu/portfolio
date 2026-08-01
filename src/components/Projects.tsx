@@ -123,11 +123,11 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
                       <div className="w-2.5 h-2.5 rounded-full bg-teal-500/40" />
                       <div className="w-2.5 h-2.5 rounded-full bg-cyan-500/40" />
                     </div>
-                    <div className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#010b07]/80 border border-emerald-500/20 text-[11px] font-mono text-emerald-300/80 max-w-[200px] truncate">
+                    <div className={`flex items-center gap-1.5 px-3 py-1 rounded-lg border border-emerald-500/20 text-[11px] font-mono max-w-[200px] truncate ${darkMode ? 'bg-[#010b07]/80 text-emerald-300/80' : 'bg-slate-800/80 text-slate-300'}`}>
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                       <span className="truncate">{project.demoUrl ? project.demoUrl.replace('https://', '') : 'ka-farm.app'}</span>
                     </div>
-                    <div className="text-[10px] font-mono text-emerald-400/50 uppercase font-bold tracking-wider">
+                    <div className={`text-[10px] font-mono uppercase font-bold tracking-wider ${darkMode ? 'text-emerald-400/50' : 'text-slate-500'}`}>
                       LIVE PREVIEW
                     </div>
                   </div>
@@ -140,7 +140,7 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
                       loading="lazy"
                       className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#03140d] via-transparent to-transparent opacity-80" />
+                    <div className={`absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-80 ${darkMode ? 'from-[#03140d]' : 'from-slate-900/60'}`} />
 
                     {project.featured && (
                       <div className="absolute top-3 left-3 z-10 px-3 py-1 rounded-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 text-slate-950 text-xs font-black uppercase font-mono shadow-lg flex items-center gap-1.5">
@@ -151,11 +151,11 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
                   </div>
 
                   {/* Image Bottom Info Badges */}
-                  <div className="p-3 bg-[#03140d]/90 border-t border-emerald-500/20 flex flex-wrap items-center justify-between gap-2 z-10 backdrop-blur-md">
+                  <div className={`p-3 border-t border-emerald-500/20 flex flex-wrap items-center justify-between gap-2 z-10 backdrop-blur-md ${darkMode ? 'bg-[#03140d]/90' : 'bg-slate-900/80'}`}>
                     <span className="px-3 py-1 rounded-xl bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-mono text-xs font-bold">
                       {project.category}
                     </span>
-                    <span className="px-3 py-1 rounded-xl bg-amber-500/10 text-amber-300 border border-amber-500/20 font-mono text-xs font-medium flex items-center gap-1.5">
+                    <span className={`px-3 py-1 rounded-xl border font-mono text-xs font-medium flex items-center gap-1.5 ${darkMode ? 'bg-amber-500/10 text-amber-300 border-amber-500/20' : 'bg-amber-100 text-amber-700 border-amber-200'}`}>
                       <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
                       En cours de développement
                     </span>
@@ -169,10 +169,10 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
                       <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight group-hover:text-emerald-300 transition-colors">
                         {project.title}
                       </h3>
-                      <span className="text-xs font-mono text-emerald-400/60">01 / 01</span>
+                      <span className={`text-xs font-mono ${darkMode ? 'text-emerald-400/60' : 'text-slate-500'}`}>01 / 01</span>
                     </div>
 
-                    <p className="text-xs font-mono text-emerald-400 font-semibold leading-snug">
+                    <p className={`text-xs font-mono font-semibold leading-snug ${darkMode ? 'text-emerald-400' : 'text-emerald-600'}`}>
                       {project.tagline}
                     </p>
 
@@ -184,13 +184,13 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
 
                     {/* Highlights List */}
                     <div className="space-y-2 pt-2">
-                      <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                      <h4 className={`text-xs font-mono font-bold uppercase tracking-wider ${darkMode ? 'text-emerald-400' : 'text-emerald-600'}`}>
                         Points Clés du Projet :
                       </h4>
                       <div className="grid grid-cols-1 gap-2 text-xs">
                         {project.highlights.map((item, idx) => (
-                          <div key={idx} className="flex items-start gap-2 text-emerald-100/80">
-                            <span className="text-emerald-400 font-bold mt-0.5">•</span>
+                          <div key={idx} className={`flex items-start gap-2 ${darkMode ? 'text-emerald-100/80' : 'text-slate-700'}`}>
+                            <span className={`font-bold mt-0.5 ${darkMode ? 'text-emerald-400' : 'text-emerald-600'}`}>•</span>
                             <span>{item}</span>
                           </div>
                         ))}
@@ -216,7 +216,11 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 rounded-xl bg-[#03140d]/80 border border-emerald-500/30 text-emerald-200 hover:text-white hover:border-emerald-400 text-xs font-semibold font-mono transition-all backdrop-blur-md"
+                        className={`flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 rounded-xl border text-xs font-semibold font-mono transition-all backdrop-blur-md ${
+                          darkMode
+                            ? 'bg-[#03140d]/80 border-emerald-500/30 text-emerald-200 hover:text-white hover:border-emerald-400'
+                            : 'bg-slate-100 border-emerald-200 text-slate-700 hover:text-slate-900 hover:border-emerald-300'
+                        }`}
                         id={`project-github-link-${project.id}`}
                       >
                         <Github className="w-4 h-4" />
@@ -245,10 +249,10 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
 
           {/* Placeholder card for future projects */}
           <div className={`p-8 rounded-3xl border border-dashed text-center space-y-4 transition-all backdrop-blur-md ${
-            darkMode ? 'bg-[#041a12]/40 border-emerald-500/30 text-emerald-200/80' : 'bg-white/60 border-emerald-300 text-slate-600'
+            darkMode ? 'bg-[#041a12]/40 border-emerald-500/30 text-slate-300' : 'bg-white/60 border-emerald-300 text-slate-600'
           }`}>
-            <div className="w-12 h-12 rounded-2xl bg-emerald-950/60 border border-emerald-500/30 flex items-center justify-center mx-auto text-emerald-400">
-              <Layers className="w-6 h-6 text-emerald-400" />
+            <div className={`w-12 h-12 rounded-2xl border flex items-center justify-center mx-auto ${darkMode ? 'bg-emerald-950/60 border-emerald-500/30 text-emerald-400' : 'bg-emerald-50 border-emerald-200 text-emerald-600'}`}>
+              <Layers className="w-6 h-6" />
             </div>
             <div className="space-y-1">
               <h4 className={`text-base font-bold ${darkMode ? 'text-emerald-200' : 'text-emerald-700'}`}>Prochains Projets en Développement</h4>
