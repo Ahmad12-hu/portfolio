@@ -137,7 +137,7 @@ export const Skills = React.memo(() => {
                       </div>
 
                       {/* Progress Bar */}
-                      <div className="w-full h-2 rounded-full bg-slate-950/40 overflow-hidden border border-emerald-500/20">
+                      <div className={`w-full h-2 rounded-full overflow-hidden border border-emerald-500/20 ${darkMode ? 'bg-slate-950/40' : 'bg-slate-200/60'}`}>
                         <div
                           className={`h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-1000`}
                           style={{ width: `${skill.level}%` }}
@@ -171,7 +171,7 @@ export const Skills = React.memo(() => {
                   <span>{item.domain}</span>
                   <span className="font-mono text-emerald-400">{item.level}%</span>
                 </div>
-                <div className="w-full h-2.5 rounded-full bg-slate-950/40 overflow-hidden border border-emerald-500/20">
+                <div className={`w-full h-2.5 rounded-full overflow-hidden border border-emerald-500/20 ${darkMode ? 'bg-slate-950/40' : 'bg-slate-200/60'}`}>
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400"
                     style={{ width: `${item.level}%` }}
@@ -183,7 +183,7 @@ export const Skills = React.memo(() => {
         </div>
 
         {/* Tech Stack Pills Summary */}
-        <div className="mt-8 p-6 rounded-2xl border bg-[#041a12]/40 border-emerald-500/20 backdrop-blur-md text-center space-y-4">
+        <div className={`mt-8 p-6 rounded-2xl border backdrop-blur-md text-center space-y-4 ${darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200'}`}>
           <h4 className="text-xs font-bold font-mono uppercase tracking-wider text-slate-400">
             Badges Techniques Clés
           </h4>
@@ -199,7 +199,7 @@ export const Skills = React.memo(() => {
             ].map((tech) => (
               <span
                 key={tech.label}
-                className="px-3.5 py-1.5 rounded-xl bg-slate-900 border border-slate-700/80 text-cyan-300 text-xs font-mono font-medium shadow-sm hover:border-cyan-400 transition-colors flex items-center gap-2"
+                className={`px-3.5 py-1.5 rounded-xl border text-xs font-mono font-medium shadow-sm hover:border-cyan-400 transition-colors flex items-center gap-2 ${darkMode ? 'bg-slate-900 border-slate-700/80 text-cyan-300' : 'bg-slate-100 border-slate-300 text-slate-700'}`}
               >
                 <span>{tech.label}</span>
                 <span className={`text-[10px] px-2 py-0.5 rounded-md font-bold ${
