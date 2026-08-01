@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Code2, Menu, X, Download, Sun, Moon, Sparkles, MapPin } from 'lucide-react';
+import { Code2, Download, Sun, Moon, Sparkles, MapPin } from 'lucide-react';
 import { userProfile } from '../data/portfolioData';
 import { useTheme } from '../contexts/ThemeContext';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -13,7 +13,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCv, onOpenEditProfile }) =
   const { darkMode, toggleDarkMode } = useTheme();
   const { lang, setLang } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
 
@@ -52,7 +51,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCv, onOpenEditProfile }) =
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    setMobileMenuOpen(false);
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
     if (element) {
@@ -164,7 +162,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCv, onOpenEditProfile }) =
           </a>
         </div>
 
-        {/* Mobile menu trigger */}
+        {/* Mobile actions */}
         <div className="flex items-center gap-2 md:hidden">
           <button
             onClick={toggleDarkMode}
@@ -175,59 +173,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCv, onOpenEditProfile }) =
           >
             {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
-
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`p-2.5 rounded-xl border transition-all ${
-              darkMode
-                ? 'bg-slate-900 border-slate-800 text-slate-200'
-                : 'bg-slate-100 border-slate-200 text-slate-800'
-            }`}
-            id="mobile-menu-trigger"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
-      {mobileMenuOpen && (
-        <div className={`md:hidden border-b px-4 py-6 space-y-4 animate-in slide-in-from-top duration-300 ${
-          darkMode ? 'bg-slate-950/95 border-slate-800 text-white' : 'bg-white/95 border-slate-200 text-slate-900'
-        }`}>
-          <div className="flex flex-col gap-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className={`px-4 py-3 rounded-xl text-sm font-medium transition-all ${
-                  activeSection === link.href.replace('#', '')
-                    ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30'
-                    : 'hover:bg-slate-800/40'
-                }`}
-                id={`mobile-link-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-
-          <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenCv();
-              }}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold text-sm shadow-lg shadow-cyan-500/20"
-              id="mobile-cv-btn"
-            >
-              <Download className="w-4 h-4" />
-              <span>Voir & Télécharger mon CV</span>
-            </button>
-          </div>
-        </div>
-      )}
     </header>
   );
 };
