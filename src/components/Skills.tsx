@@ -49,9 +49,9 @@ export const Skills = React.memo(() => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`py-20 relative transition-colors duration-300 ${
-        darkMode ? 'bg-transparent text-emerald-50' : 'bg-[#f0f7f4]/40 text-slate-900'
-      }`}
+       className={`py-20 relative transition-colors duration-300 ${
+         darkMode ? 'bg-transparent text-emerald-50' : 'bg-[#f5f5f0] text-slate-900'
+       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -74,7 +74,7 @@ export const Skills = React.memo(() => {
 
         {/* Filter Category Tabs */}
         <div className={`flex flex-wrap items-center justify-center gap-2 mb-8 sm:mb-10 p-1.5 rounded-2xl border backdrop-blur-md max-w-xl mx-auto ${
-          darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200'
+          darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/95 border-emerald-200'
         }`}>
           {filterOptions.map((filter) => (
             <button
@@ -99,7 +99,7 @@ export const Skills = React.memo(() => {
             <div
               key={category.name}
               className={`p-5 sm:p-6 lg:p-8 rounded-3xl border backdrop-blur-md space-y-4 sm:space-y-6 transition-all shadow-xl ${
-                darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200 shadow-slate-200/50'
+                darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white border-emerald-200 shadow-slate-200/60'
               }`}
             >
               <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-emerald-500/20">
@@ -157,7 +157,7 @@ export const Skills = React.memo(() => {
 
         {/* Domain Progress Bars Section */}
         <div className={`p-8 rounded-3xl border backdrop-blur-md space-y-6 ${
-          darkMode ? 'bg-[#041a12]/40 border-emerald-500/30' : 'bg-white/90 border-emerald-200 shadow-xl'
+          darkMode ? 'bg-[#041a12]/40 border-emerald-500/30' : 'bg-white border-emerald-200 shadow-xl'
         }`}>
           <div className="flex items-center gap-2 text-emerald-400 text-xs font-mono font-bold uppercase tracking-wider">
             <Award className="w-4 h-4" />
@@ -183,7 +183,7 @@ export const Skills = React.memo(() => {
         </div>
 
         {/* Tech Stack Pills Summary */}
-        <div className={`mt-8 p-6 rounded-2xl border backdrop-blur-md text-center space-y-4 ${darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200'}`}>
+        <div className={`mt-8 p-6 rounded-2xl border backdrop-blur-md text-center space-y-4 ${darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/90 border-emerald-200'}`}>
           <h4 className="text-xs font-bold font-mono uppercase tracking-wider text-slate-400">
             Badges Techniques Clés
           </h4>
