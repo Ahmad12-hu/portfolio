@@ -60,7 +60,7 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Category Tabs */}
             <div className={`flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl border backdrop-blur-md ${
-              darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200'
+              darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/90 border-emerald-200'
             }`}>
               {categories.map((cat) => (
                 <button
@@ -108,7 +108,7 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
               className={`group rounded-3xl border transition-all duration-300 overflow-hidden relative backdrop-blur-md ${
                 darkMode
                   ? 'bg-[#041a12]/40 border-emerald-500/25 hover:border-emerald-400/60 hover:shadow-2xl hover:shadow-emerald-950/40'
-                  : 'bg-white/85 border-emerald-200 shadow-xl shadow-slate-200/50'
+                  : 'bg-white border-emerald-200 shadow-xl shadow-slate-200/60'
               }`}
               id={`project-card-${project.id}`}
             >
@@ -249,7 +249,7 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
 
           {/* Placeholder card for future projects */}
           <div className={`p-8 rounded-3xl border border-dashed text-center space-y-4 transition-all backdrop-blur-md ${
-            darkMode ? 'bg-[#041a12]/40 border-emerald-500/30 text-slate-300' : 'bg-white/60 border-emerald-300 text-slate-600'
+            darkMode ? 'bg-[#041a12]/40 border-emerald-500/30 text-slate-300' : 'bg-white/80 border-emerald-300 text-slate-600'
           }`}>
             <div className={`w-12 h-12 rounded-2xl border flex items-center justify-center mx-auto ${darkMode ? 'bg-emerald-950/60 border-emerald-500/30 text-emerald-400' : 'bg-emerald-50 border-emerald-200 text-emerald-600'}`}>
               <Layers className="w-6 h-6" />
