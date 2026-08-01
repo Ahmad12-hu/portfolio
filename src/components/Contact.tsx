@@ -36,7 +36,7 @@ export const Contact = React.memo(() => {
 
   return (
     <section id="contact" className={`py-20 relative transition-colors duration-300 ${
-      darkMode ? 'bg-transparent text-emerald-50' : 'bg-[#f0f7f4]/40 text-slate-900'
+      darkMode ? 'bg-transparent text-emerald-50' : 'bg-[#f5f5f0] text-slate-900'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -62,9 +62,9 @@ export const Contact = React.memo(() => {
           {/* Left Column: Direct Contact Info & Socials */}
           <div className="lg:col-span-5 space-y-6">
 
-            <div className={`p-5 sm:p-6 lg:p-8 rounded-3xl border space-y-4 sm:space-y-6 backdrop-blur-md transition-all shadow-xl ${
-              darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200 shadow-slate-200/50'
-            }`}>
+             <div className={`p-5 sm:p-6 lg:p-8 rounded-3xl border space-y-4 sm:space-y-6 backdrop-blur-md transition-all shadow-xl ${
+               darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white border-emerald-200 shadow-slate-200/60'
+             }`}>
               <h3 className="text-lg sm:text-xl font-bold tracking-tight">Coordonnées</h3>
 
               <div className="space-y-4">
@@ -162,9 +162,9 @@ export const Contact = React.memo(() => {
 
           {/* Right Column: Interactive Form */}
           <div className="lg:col-span-7">
-            <div className={`p-5 sm:p-6 lg:p-8 rounded-3xl border backdrop-blur-md transition-all shadow-xl ${
-              darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white/80 border-emerald-200 shadow-slate-200/50'
-            }`}>
+             <div className={`p-5 sm:p-6 lg:p-8 rounded-3xl border backdrop-blur-md transition-all shadow-xl ${
+               darkMode ? 'bg-[#041a12]/40 border-emerald-500/20' : 'bg-white border-emerald-200 shadow-slate-200/60'
+             }`}>
               <h3 className="text-lg sm:text-xl font-bold tracking-tight mb-4 sm:mb-6">M'envoyer un message</h3>
 
               {submitted ? (
