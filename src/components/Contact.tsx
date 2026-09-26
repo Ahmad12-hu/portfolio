@@ -42,17 +42,17 @@ export const Contact = React.memo(() => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-8 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono backdrop-blur-md shadow-inner">
+          <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono backdrop-blur-md shadow-inner ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>
             <MessageSquare className="w-3.5 h-3.5" />
             <span>Me Contacter</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
             Discutons de votre <br />
-            <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+            <span className={`bg-gradient-to-r bg-clip-text text-transparent ${darkMode ? 'from-emerald-400 via-teal-300 to-cyan-400' : 'from-emerald-700 via-teal-600 to-cyan-700'}`}>
               Prochain Projet
             </span>
           </h2>
-          <p className={`text-sm sm:text-base ${darkMode ? 'text-emerald-200/80' : 'text-slate-600'}`}>
+          <p className={`text-sm sm:text-base ${darkMode ? 'text-emerald-200/80' : 'text-slate-800'}`}>
             Actuellement étudiant en développement web, je suis ouvert aux collaborations, projets concrets et opportunités d'apprentissage. Contactez-moi !
           </p>
         </div>
@@ -72,11 +72,11 @@ export const Contact = React.memo(() => {
                 <div className={`p-4 rounded-2xl border space-y-2 backdrop-blur-md ${
                   darkMode ? 'bg-[#02100a]/80 border-emerald-500/20' : 'bg-emerald-50/70 border-emerald-200'
                 }`}>
-                  <div className="text-[10px] font-mono uppercase tracking-wider text-emerald-400">Email direct</div>
+                  <div className={`text-[10px] font-mono uppercase tracking-wider ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>Email direct</div>
                   <div className="flex items-center justify-between gap-2">
                     <a
                       href={`mailto:${userProfile.email}`}
-                      className="text-xs sm:text-sm font-bold text-emerald-400 hover:underline truncate"
+                      className={`text-xs sm:text-sm font-bold hover:underline truncate ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}
                     >
                       {userProfile.email}
                     </a>
@@ -90,7 +90,7 @@ export const Contact = React.memo(() => {
                     </button>
                   </div>
                   {copiedEmail && (
-                    <span className="text-[10px] text-emerald-400 font-mono inline-block">✓ Email copié dans le presse-papier !</span>
+                    <span className={`text-[10px] font-mono inline-block ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>✓ Email copié dans le presse-papier !</span>
                   )}
                 </div>
 
@@ -102,7 +102,7 @@ export const Contact = React.memo(() => {
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-[10px] font-mono uppercase tracking-wider text-emerald-400">Localisation</div>
+                    <div className={`text-[10px] font-mono uppercase tracking-wider ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>Localisation</div>
                     <div className="text-xs font-bold">{userProfile.location}, {userProfile.country}</div>
                   </div>
                 </div>
@@ -122,8 +122,8 @@ export const Contact = React.memo(() => {
                       <Github className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="text-[10px] font-mono uppercase tracking-wider text-emerald-400">GitHub</div>
-                      <div className="text-xs font-bold">Ahmad12-hu</div>
+                      <div className={`text-[10px] font-mono uppercase tracking-wider ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>GitHub</div>
+                      <div className="text-xs font-bold text-slate-900">Ahmad12-hu</div>
                     </div>
                   </div>
                   <span className="text-xs text-emerald-400 font-mono group-hover:translate-x-1 transition-transform">→</span>
@@ -144,15 +144,15 @@ export const Contact = React.memo(() => {
                       <Linkedin className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="text-[10px] font-mono uppercase tracking-wider text-emerald-400">LinkedIn</div>
-                      <div className="text-xs font-bold">Amadou Ka</div>
+                      <div className={`text-[10px] font-mono uppercase tracking-wider ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>LinkedIn</div>
+                      <div className="text-xs font-bold text-slate-900">Amadou Ka</div>
                     </div>
                   </div>
                   <span className="text-xs text-emerald-400 font-mono group-hover:translate-x-1 transition-transform">→</span>
                 </a>
               </div>
 
-              <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-300 flex items-center gap-2 backdrop-blur-md">
+              <div className={`p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-xs flex items-center gap-2 backdrop-blur-md ${darkMode ? 'text-amber-300' : 'text-amber-700'}`}>
                 <GraduationCap className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 <span>Actuellement concentré sur mes études et mes travaux de recherche.</span>
               </div>
@@ -178,7 +178,7 @@ export const Contact = React.memo(() => {
                   </div>
                   <h4 className={`font-bold text-lg ${darkMode ? 'text-white' : 'text-slate-900'}`}>Message envoyé avec succès !</h4>
                   <p className={`text-xs ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
-                    Merci pour votre message. Je vous répondrai dans les plus brefs délais sur <span className="text-emerald-600 font-mono">{userProfile.email}</span>.
+                    Merci pour votre message. Je vous répondrai dans les plus brefs délais sur <span className={`font-mono ${darkMode ? 'text-emerald-600' : 'text-emerald-700'}`}>{userProfile.email}</span>.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
@@ -191,7 +191,7 @@ export const Contact = React.memo(() => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-emerald-400 mb-1">Votre Nom *</label>
+                      <label className={`block text-xs font-semibold mb-1 ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>Votre Nom *</label>
                       <input
                         type="text"
                         required
@@ -206,7 +206,7 @@ export const Contact = React.memo(() => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-emerald-400 mb-1">Votre Email *</label>
+                      <label className={`block text-xs font-semibold mb-1 ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>Votre Email *</label>
                       <input
                         type="email"
                         required
@@ -222,7 +222,7 @@ export const Contact = React.memo(() => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-emerald-400 mb-1">Sujet</label>
+                    <label className={`block text-xs font-semibold mb-1 ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>Sujet</label>
                     <input
                       type="text"
                       value={formData.subject}
@@ -235,7 +235,7 @@ export const Contact = React.memo(() => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-emerald-400 mb-1">Votre Message *</label>
+                    <label className={`block text-xs font-semibold mb-1 ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>Votre Message *</label>
                     <textarea
                       required
                       rows={5}

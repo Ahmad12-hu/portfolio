@@ -58,32 +58,32 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
           {/* Header Info */}
           <div className="border-b border-slate-800 pb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-cyan-400">
+              <h1 className={`text-2xl sm:text-3xl font-extrabold tracking-tight ${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`}>
                 {userProfile.name}
               </h1>
-              <p className="text-sm font-bold text-slate-300 font-mono mt-1">
+              <p className={`text-sm font-bold font-mono mt-1 ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                 {userProfile.title} — Dakar, Sénégal 🇸🇳
               </p>
-              <p className="text-xs text-slate-400 max-w-xl mt-2 leading-relaxed">
+              <p className={`text-xs max-w-xl mt-2 leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
                 {userProfile.bio}
               </p>
             </div>
 
-            <div className="space-y-1.5 text-xs text-slate-300 font-mono bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+            <div className={`space-y-1.5 text-xs font-mono p-4 rounded-xl border ${darkMode ? 'text-slate-300 bg-slate-900/60 border-slate-800' : 'text-slate-700 bg-slate-100 border-slate-200'}`}>
               <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-cyan-400" />
+                <Mail className={`w-3.5 h-3.5 ${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`} />
                 <span>{userProfile.email}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Github className="w-3.5 h-3.5 text-cyan-400" />
+                <Github className={`w-3.5 h-3.5 ${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`} />
                 <span>github.com/Ahmad12-hu</span>
               </div>
               <div className="flex items-center gap-2">
-                <Linkedin className="w-3.5 h-3.5 text-cyan-400" />
+                <Linkedin className={`w-3.5 h-3.5 ${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`} />
                 <span>{userProfile.linkedin.replace('https://', '')}</span>
               </div>
               <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                <MapPin className={`w-3.5 h-3.5 ${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`} />
                 <span>Dakar, Sénégal</span>
               </div>
             </div>
@@ -91,19 +91,19 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
 
           {/* Section: Compétences Clés */}
           <div className="space-y-3">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-cyan-400 font-mono border-b border-slate-800 pb-1">
+            <h2 className={`text-sm font-bold uppercase tracking-wider font-mono border-b border-slate-800 pb-1 ${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`}>
               Compétences Techniques & Outils
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <h3 className="font-bold text-white text-xs mb-1">Développement Web Frontend</h3>
-                <p className="text-slate-300 text-xs">
+                <h3 className={`font-bold text-xs mb-1 ${darkMode ? 'text-white' : 'text-slate-900'}`}>Développement Web Frontend</h3>
+                <p className={`text-xs ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                   <strong>HTML5</strong> (Maîtrisé), <strong>CSS3</strong> (Maîtrisé), <strong>JavaScript</strong> (En apprentissage actif).
                 </p>
               </div>
               <div>
-                <h3 className="font-bold text-white text-xs mb-1">Gestion de Code & Outils</h3>
-                <p className="text-slate-300 text-xs">
+                <h3 className={`font-bold text-xs mb-1 ${darkMode ? 'text-white' : 'text-slate-900'}`}>Gestion de Code & Outils</h3>
+                <p className={`text-xs ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
                   <strong>Git</strong> (Maîtrisé), <strong>GitHub</strong> (Maîtrisé), Workflow de commits et dépôts distants.
                 </p>
               </div>
@@ -112,7 +112,7 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
 
           {/* Section: Projets Réalisés */}
           <div className="space-y-4">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-cyan-400 font-mono border-b border-slate-800 pb-1">
+            <h2 className={`text-sm font-bold uppercase tracking-wider font-mono border-b border-slate-800 pb-1 ${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`}>
               Projets Majeurs
             </h2>
 
@@ -140,7 +140,7 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
 
           {/* Section: Parcours & Engagement */}
           <div className="space-y-3">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-cyan-400 font-mono border-b border-slate-800 pb-1">
+            <h2 className={`text-sm font-bold uppercase tracking-wider font-mono border-b border-slate-800 pb-1 ${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`}>
               Parcours & Engagement Communautaire
             </h2>
 
@@ -148,10 +148,10 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
               {timelineData.map((item, idx) => (
                 <div key={idx} className="space-y-1">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-white">{item.role} — <span className="text-cyan-400">{item.institution}</span></span>
-                    <span className="font-mono text-slate-400">{item.year}</span>
+                    <span className={`font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>{item.role} — <span className={`${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`}>{item.institution}</span></span>
+                    <span className={`font-mono ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>{item.year}</span>
                   </div>
-                  <p className="text-xs text-slate-300">{item.description}</p>
+                  <p className={`text-xs ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>{item.description}</p>
                 </div>
               ))}
             </div>
@@ -159,10 +159,10 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
 
           {/* Section: Langues */}
           <div className="space-y-2">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-cyan-400 font-mono border-b border-slate-800 pb-1">
+            <h2 className={`text-sm font-bold uppercase tracking-wider font-mono border-b border-slate-800 pb-1 ${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`}>
               Langues
             </h2>
-            <div className="flex gap-6 text-xs text-slate-300">
+            <div className={`flex gap-6 text-xs ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
               <div>• <strong>Français :</strong> Courant (langue de travail)</div>
               <div>• <strong>Wolof :</strong> Langue maternelle</div>
               <div>• <strong>Anglais :</strong> Technique (Lecture doc & code)</div>

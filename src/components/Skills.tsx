@@ -10,16 +10,16 @@ export const Skills = React.memo(() => {
 
   const filterOptions = ['Tous', 'Langages', 'Frameworks', 'Outils', 'Soft Skills'];
 
-  const getLevelBadge = (level: number, name: string) => {
+  const getLevelBadge = (level: number, name: string, darkMode: boolean) => {
     if (name.toLowerCase().includes('react')) {
-      return { label: 'Notions de base', color: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30' };
+      return { label: 'Notions de base', color: `bg-cyan-500/20 border-cyan-500/30 ${darkMode ? 'text-cyan-300' : 'text-cyan-700'}` };
     }
     if (name.toLowerCase().includes('javascript') && !name.toLowerCase().includes('html')) {
-      return { label: 'En apprentissage', color: 'bg-amber-500/20 text-amber-300 border-amber-500/30' };
+      return { label: 'En apprentissage', color: `bg-amber-500/20 border-amber-500/30 ${darkMode ? 'text-amber-300' : 'text-amber-700'}` };
     }
-    if (level >= 85) return { label: 'Avancé / Maîtrisé', color: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' };
-    if (level >= 70) return { label: 'En apprentissage', color: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30' };
-    return { label: 'Pratique', color: 'bg-slate-500/20 text-slate-300 border-slate-500/30' };
+    if (level >= 85) return { label: 'Avancé / Maîtrisé', color: `bg-emerald-500/20 border-emerald-500/30 ${darkMode ? 'text-emerald-300' : 'text-emerald-700'}` };
+    if (level >= 70) return { label: 'En apprentissage', color: `bg-cyan-500/20 border-cyan-500/30 ${darkMode ? 'text-cyan-300' : 'text-cyan-700'}` };
+    return { label: 'Pratique', color: `bg-slate-500/20 border-slate-500/30 ${darkMode ? 'text-slate-300' : 'text-slate-600'}` };
   };
 
   const domainProgress = [
@@ -57,17 +57,17 @@ export const Skills = React.memo(() => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono backdrop-blur-md shadow-inner">
+          <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono backdrop-blur-md shadow-inner ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>
             <Cpu className="w-3.5 h-3.5" />
             <span>Compétences & Stack Technique</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
             Mon Écosystème <br />
-            <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+            <span className={`bg-gradient-to-r bg-clip-text text-transparent ${darkMode ? 'from-emerald-400 via-teal-300 to-cyan-400' : 'from-emerald-700 via-teal-600 to-cyan-700'}`}>
               de Développement
             </span>
           </h2>
-          <p className={`text-sm sm:text-base ${darkMode ? 'text-emerald-200/80' : 'text-slate-600'}`}>
+          <p className={`text-sm sm:text-base ${darkMode ? 'text-emerald-200/80' : 'text-slate-800'}`}>
             Maîtrise des fondamentaux du Web et pratique des frameworks modernes orientés performance, maintenabilité et expérience utilisateur.
           </p>
         </div>
@@ -85,7 +85,7 @@ export const Skills = React.memo(() => {
                   ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-bold shadow-lg shadow-emerald-500/20'
                   : darkMode
                   ? 'text-emerald-200/70 hover:text-white hover:bg-emerald-900/40'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-emerald-100/50'
+                  : 'text-slate-700 hover:text-slate-900 hover:bg-emerald-100/50'
               }`}
             >
               {filter}
@@ -112,12 +112,12 @@ export const Skills = React.memo(() => {
                   </div>
                   <h3 className="text-base sm:text-lg font-bold tracking-tight">{category.name}</h3>
                 </div>
-                <span className="text-xs font-mono text-emerald-400/60">{category.skills.length} compétences</span>
+                <span className={`text-xs font-mono ${darkMode ? 'text-emerald-400/60' : 'text-emerald-700/80'}`}>{category.skills.length} compétences</span>
               </div>
 
               <div className="space-y-4">
                 {category.skills.map((skill) => {
-                  const badge = getLevelBadge(skill.level, skill.name);
+                  const badge = getLevelBadge(skill.level, skill.name, darkMode);
                   return (
                     <div key={skill.name} className={`space-y-2 p-3.5 rounded-2xl border transition-all ${
                       darkMode ? 'bg-[#02100a]/60 border-emerald-500/15 hover:border-emerald-500/30' : 'bg-emerald-50/50 border-emerald-100'
@@ -132,7 +132,7 @@ export const Skills = React.memo(() => {
                           <span className={`px-2 py-0.5 rounded-lg border text-[10px] font-mono font-bold ${badge.color}`}>
                             {badge.label}
                           </span>
-                          <span className="font-mono text-emerald-400 text-xs font-bold">{skill.level}%</span>
+                          <span className={`font-mono text-xs font-bold ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>{skill.level}%</span>
                         </div>
                       </div>
 
@@ -159,7 +159,7 @@ export const Skills = React.memo(() => {
         <div className={`p-8 rounded-3xl border backdrop-blur-md space-y-6 ${
           darkMode ? 'bg-[#041a12]/40 border-emerald-500/30' : 'bg-white border-emerald-200 shadow-xl'
         }`}>
-          <div className="flex items-center gap-2 text-emerald-400 text-xs font-mono font-bold uppercase tracking-wider">
+          <div className={`flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>
             <Award className="w-4 h-4" />
             <span>Progression Globale par Domaine</span>
           </div>
@@ -169,7 +169,7 @@ export const Skills = React.memo(() => {
               <div key={item.domain} className="space-y-2">
                 <div className="flex items-center justify-between text-xs font-bold">
                   <span>{item.domain}</span>
-                  <span className="font-mono text-emerald-400">{item.level}%</span>
+                  <span className={`font-mono ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>{item.level}%</span>
                 </div>
                 <div className={`w-full h-2.5 rounded-full overflow-hidden border border-emerald-500/20 ${darkMode ? 'bg-slate-950/40' : 'bg-slate-200/60'}`}>
                   <div
@@ -204,10 +204,10 @@ export const Skills = React.memo(() => {
                 <span>{tech.label}</span>
                 <span className={`text-[10px] px-2 py-0.5 rounded-md font-bold ${
                   tech.status === 'En apprentissage'
-                    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                    ? `bg-amber-500/20 border border-amber-500/30 ${darkMode ? 'text-amber-300' : 'text-amber-700'}`
                     : tech.status === 'Notions de base'
-                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
-                    : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                    ? `bg-cyan-500/20 border border-cyan-500/30 ${darkMode ? 'text-cyan-300' : 'text-cyan-700'}`
+                    : `bg-emerald-500/20 border border-emerald-500/30 ${darkMode ? 'text-emerald-300' : 'text-emerald-700'}`
                 }`}>
                   {tech.status}
                 </span>

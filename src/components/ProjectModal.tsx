@@ -24,7 +24,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         {/* Modal Header */}
         <div className="flex items-center justify-between p-5 sm:p-6 border-b border-slate-800/80 sticky top-0 bg-inherit z-10">
           <div className="flex items-center gap-3">
-            <span className="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 text-xs font-mono font-bold">
+            <span className={`px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono font-bold ${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`}>
               {project.category}
             </span>
             <h3 className="text-xl sm:text-2xl font-bold tracking-tight">{project.title}</h3>
@@ -67,8 +67,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 <div key={i} className={`p-3 rounded-xl border text-center ${
                   darkMode ? 'bg-slate-900/60 border-slate-800' : 'bg-slate-50 border-slate-200'
                 }`}>
-                  <div className="text-[10px] text-slate-400 font-mono uppercase">{st.label}</div>
-                  <div className="text-sm font-bold text-cyan-400 font-mono mt-0.5">{st.value}</div>
+                  <div className={`text-[10px] font-mono uppercase ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>{st.label}</div>
+                  <div className={`text-sm font-bold font-mono mt-0.5 ${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`}>{st.value}</div>
                 </div>
               ))}
             </div>
@@ -76,7 +76,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
           {/* Description */}
           <div className="space-y-3">
-            <h4 className="text-sm font-bold uppercase tracking-wider text-slate-400 font-mono">Présentation détaillée</h4>
+            <h4 className={`text-sm font-bold uppercase tracking-wider font-mono ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Présentation détaillée</h4>
             <p className={`text-sm sm:text-base leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>
               {project.fullDescription}
             </p>
@@ -84,7 +84,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
           {/* Highlights List */}
           <div className="space-y-3">
-            <h4 className="text-sm font-bold uppercase tracking-wider text-slate-400 font-mono">Fonctionnalités clés</h4>
+            <h4 className={`text-sm font-bold uppercase tracking-wider font-mono ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Fonctionnalités clés</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {project.highlights.map((item, idx) => (
                 <div key={idx} className={`p-3 rounded-xl border flex items-start gap-2.5 text-xs ${
@@ -99,7 +99,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
           {/* Embedded Live Interactive Widget Demo */}
           <div className="space-y-3 pt-2">
-            <h4 className="text-sm font-bold uppercase tracking-wider text-cyan-400 font-mono flex items-center gap-2">
+            <h4 className={`text-sm font-bold uppercase tracking-wider font-mono flex items-center gap-2 ${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`}>
               <Sparkles className="w-4 h-4 text-cyan-400" />
               Démonstration Intégrée Interactive
             </h4>
@@ -121,7 +121,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
           {/* Tech Stack Tags */}
           <div className="space-y-2">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">Technologies utilisées</h4>
+            <h4 className={`text-xs font-bold uppercase tracking-wider font-mono ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Technologies utilisées</h4>
             <div className="flex flex-wrap gap-2">
               {project.tags.map((t) => (
                 <span
@@ -166,7 +166,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
           <button
             onClick={onClose}
-            className="text-xs text-slate-400 hover:text-white underline font-mono"
+            className={`text-xs underline font-mono ${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}
           >
             Fermer l'aperçu
           </button>

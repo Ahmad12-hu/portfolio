@@ -21,17 +21,17 @@ export const About = React.memo(() => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono backdrop-blur-md shadow-inner">
+          <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono backdrop-blur-md shadow-inner ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>
             <User className="w-3.5 h-3.5" />
             <span>À propos de moi</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
             Passionné par le code, guidé par <br />
-            <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+            <span className={`bg-gradient-to-r bg-clip-text text-transparent ${darkMode ? 'from-emerald-400 via-teal-300 to-cyan-400' : 'from-emerald-700 via-teal-600 to-cyan-700'}`}>
               l'impact social et communautaire
             </span>
           </h2>
-          <p className={`text-sm sm:text-base lg:text-lg ${darkMode ? 'text-emerald-200/80' : 'text-slate-600'}`}>
+          <p className={`text-sm sm:text-base lg:text-lg ${darkMode ? 'text-emerald-200/80' : 'text-slate-800'}`}>
             Basé à Dakar (Sénégal), je mets la technologie au service de solutions concrètes pour mon entourage et la communauté des jeunes développeurs.
           </p>
         </div>
@@ -54,11 +54,11 @@ export const About = React.memo(() => {
                   <span className="text-2xl sm:text-3xl">🇸🇳</span>
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold">{userProfile.name}</h3>
-                    <p className="text-xs font-mono text-emerald-400 font-semibold">{userProfile.title} @ Dakar</p>
+                    <p className={`text-xs font-mono font-semibold ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>{userProfile.title} @ Dakar</p>
                   </div>
                 </div>
 
-                <p className={`text-sm sm:text-base leading-relaxed ${darkMode ? 'text-emerald-100/90' : 'text-slate-700'}`}>
+                <p className={`text-sm sm:text-base leading-relaxed ${darkMode ? 'text-emerald-100/90' : 'text-slate-800'}`}>
                   {userProfile.detailedBio}
                 </p>
 
@@ -68,8 +68,8 @@ export const About = React.memo(() => {
                       <BookOpen className="w-4 h-4" />
                     </div>
                     <div className="text-left">
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400">Auto-formation</h4>
-                      <p className={`text-xs font-medium ${darkMode ? 'text-emerald-100/85' : 'text-slate-600'}`}>Parcours structuré sur freeCodeCamp, documentation officielle et projets concrets.</p>
+                      <h4 className={`text-xs font-bold uppercase tracking-wider ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>Auto-formation</h4>
+                      <p className={`text-xs font-medium ${darkMode ? 'text-emerald-100/85' : 'text-slate-700'}`}>Parcours structuré sur freeCodeCamp, documentation officielle et projets concrets.</p>
                     </div>
                   </div>
                 </div>
@@ -86,7 +86,7 @@ export const About = React.memo(() => {
                     <CheckCircle2 className="w-5 h-5" />
                   </div>
                   <h4 className="text-xs font-bold">Code Propre & Utile</h4>
-                  <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-600'}`}>Composants réutilisables, lisibles et optimisés.</p>
+                  <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-700'}`}>Composants réutilisables, lisibles et optimisés.</p>
                 </div>
 
                 <div className={`p-4 rounded-2xl border text-center space-y-2 backdrop-blur-md transition-all ${
@@ -96,7 +96,7 @@ export const About = React.memo(() => {
                     <Heart className="w-5 h-5" />
                   </div>
                   <h4 className="text-xs font-bold">Projets Utiles</h4>
-                  <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-600'}`}>Agri-Tech Intelligente avec KA-Farm.</p>
+                  <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-700'}`}>Agri-Tech Intelligente avec KA-Farm.</p>
                 </div>
 
                 <div className={`p-4 rounded-2xl border text-center space-y-2 backdrop-blur-md transition-all ${
@@ -106,7 +106,7 @@ export const About = React.memo(() => {
                     <Award className="w-5 h-5" />
                   </div>
                   <h4 className="text-xs font-bold">Esprit d'Équipe</h4>
-                  <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-600'}`}>Co-développement familial et partage open source.</p>
+                  <p className={`text-[11px] ${darkMode ? 'text-emerald-100/80' : 'text-slate-700'}`}>Co-développement familial et partage open source.</p>
                 </div>
               </div>
             </div>

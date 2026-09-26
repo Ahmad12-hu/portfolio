@@ -95,10 +95,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCv, onOpenEditProfile }) =
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
                   isActive
-                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shadow-sm'
+                    ? 'bg-emerald-500/20 text-emerald-700 border border-emerald-500/30 shadow-sm'
                     : darkMode
                     ? 'text-emerald-200/70 hover:text-white hover:bg-emerald-900/40'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-emerald-100/50'
+                    : 'text-slate-700 hover:text-slate-900 hover:bg-emerald-100/50'
                 }`}
                 id={`nav-link-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
               >
@@ -114,7 +114,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCv, onOpenEditProfile }) =
           <button
             onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
             className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all ${
-              darkMode ? 'bg-[#041a12]/80 border border-emerald-500/20 text-emerald-200 hover:text-white' : 'bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900'
+              darkMode ? 'bg-[#041a12]/80 border border-emerald-500/20 text-emerald-200 hover:text-white' : 'bg-slate-100 border border-slate-300 text-slate-800 hover:text-slate-900'
             }`}
             title="Changer de langue / Switch language"
             id="lang-toggle-btn"
@@ -141,7 +141,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCv, onOpenEditProfile }) =
             <button
               onClick={onOpenEditProfile}
               className={`px-3 py-1.5 rounded-full border text-xs font-semibold transition-all flex items-center gap-1.5 ${
-                darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-400 hover:bg-emerald-900/40' : 'bg-slate-100 border-slate-200 text-emerald-600 hover:bg-slate-200'
+                darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-400 hover:bg-emerald-900/40' : 'bg-slate-100 border-slate-200 text-emerald-700 hover:bg-slate-200'
               }`}
               title="Personnaliser mon profil"
               id="edit-profile-nav-btn"

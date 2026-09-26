@@ -39,17 +39,17 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono backdrop-blur-md shadow-inner">
+          <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono backdrop-blur-md shadow-inner ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>
             <FolderGit2 className="w-3.5 h-3.5" />
             <span>Réalisations & Projets</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
             Mes Projets <br />
-            <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+            <span className={`bg-gradient-to-r bg-clip-text text-transparent ${darkMode ? 'from-emerald-400 via-teal-300 to-cyan-400' : 'from-emerald-700 via-teal-600 to-cyan-700'}`}>
               Concrets & Déployés
             </span>
           </h2>
-          <p className={`text-sm sm:text-base ${darkMode ? 'text-emerald-200/80' : 'text-slate-600'}`}>
+          <p className={`text-sm sm:text-base ${darkMode ? 'text-emerald-200/80' : 'text-slate-800'}`}>
             Découvrez mon projet principal KA-Farm, une application web & PWA développée pour répondre à des besoins concrets du secteur agricole au Sénégal.
           </p>
         </div>
@@ -71,7 +71,7 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
                       ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-bold shadow-lg shadow-emerald-500/20'
                       : darkMode
                       ? 'text-emerald-200/70 hover:text-white hover:bg-emerald-900/40'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-emerald-100/50'
+                      : 'text-slate-700 hover:text-slate-900 hover:bg-emerald-100/50'
                   }`}
                   id={`filter-tab-${cat.toLowerCase().replace(/\s+/g, '-')}`}
                 >
@@ -172,7 +172,7 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
                       <span className={`text-xs font-mono ${darkMode ? 'text-emerald-400/60' : 'text-slate-500'}`}>01 / 01</span>
                     </div>
 
-                    <p className={`text-xs font-mono font-semibold leading-snug ${darkMode ? 'text-emerald-400' : 'text-emerald-600'}`}>
+                    <p className={`text-xs font-mono font-semibold leading-snug ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>
                       {project.tagline}
                     </p>
 
@@ -184,7 +184,7 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
 
                     {/* Highlights List */}
                     <div className="space-y-2 pt-2">
-                      <h4 className={`text-xs font-mono font-bold uppercase tracking-wider ${darkMode ? 'text-emerald-400' : 'text-emerald-600'}`}>
+                      <h4 className={`text-xs font-mono font-bold uppercase tracking-wider ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>
                         Points Clés du Projet :
                       </h4>
                       <div className="grid grid-cols-1 gap-2 text-xs">
@@ -204,7 +204,7 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
                   <div className="pt-4 sm:pt-6 border-t border-emerald-500/20 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
                     <button
                       onClick={() => onSelectProject(project)}
-                      className="flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500 hover:text-slate-950 font-mono text-xs font-bold transition-all"
+                      className={`flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500 hover:text-slate-950 font-mono text-xs font-bold transition-all ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}
                       id={`project-details-btn-${project.id}`}
                     >
                       <Eye className="w-4 h-4" />
@@ -266,7 +266,7 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
         {filteredProjects.length === 0 && (
           <div className="text-center py-16 space-y-3">
             <Layers className="w-12 h-12 text-slate-500 mx-auto" />
-            <p className="text-slate-400 text-sm font-mono">
+            <p className={`text-sm font-mono ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
               Aucun projet ne correspond à votre recherche "{searchQuery}".
             </p>
             <button
@@ -274,7 +274,7 @@ export const Projects = React.memo<ProjectsProps>(({ onSelectProject }) => {
                 setSelectedCategory('Tous');
                 setSearchQuery('');
               }}
-              className="px-4 py-2 rounded-xl bg-cyan-500/10 text-cyan-400 text-xs font-bold"
+              className={`px-4 py-2 rounded-xl bg-cyan-500/10 text-xs font-bold ${darkMode ? 'text-cyan-400' : 'text-cyan-700'}`}
             >
               Réinitialiser les filtres
             </button>

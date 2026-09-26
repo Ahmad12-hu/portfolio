@@ -109,7 +109,7 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
             </div>
             <div>
               <h2 className={`text-sm sm:text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>{currentProfile.name}</h2>
-              <p className={`text-xs font-mono font-semibold ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>
+              <p className={`text-xs font-mono font-semibold ${darkMode ? 'text-emerald-400' : 'text-emerald-800'}`}>
                 {currentProfile.title}
               </p>
             </div>
@@ -125,7 +125,7 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
 
             {/* Typewriter Tagline */}
             <div className="flex items-center gap-2.5 py-1 text-base sm:text-xl lg:text-3xl font-bold font-mono tracking-tight min-h-[2.5rem] sm:min-h-[3rem]">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
+              <span className={`text-transparent bg-clip-text bg-gradient-to-r ${darkMode ? 'from-emerald-400 via-teal-300 to-cyan-400' : 'from-emerald-700 via-teal-600 to-cyan-700'}`}>
                 {displayedTypewriterText}
               </span>
               <span
@@ -136,7 +136,7 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
             </div>
 
             <p className={`text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-3xl ${
-              darkMode ? 'text-emerald-100/80' : 'text-slate-700'
+              darkMode ? 'text-emerald-100/80' : 'text-slate-800'
             }`}>
               {currentProfile.bio}
             </p>
@@ -169,7 +169,7 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
           </div>
 
           {/* Social Icons */}
-          <div className="pt-6 border-t border-emerald-500/25 flex items-center gap-4 text-xs sm:text-sm text-emerald-200/70">
+          <div className={`pt-6 border-t border-emerald-500/25 flex items-center gap-4 text-xs sm:text-sm ${darkMode ? 'text-emerald-200/70' : 'text-slate-600'}`}>
             <span className="font-mono font-medium">Réseaux :</span>
             <div className="flex items-center gap-2.5">
               <a

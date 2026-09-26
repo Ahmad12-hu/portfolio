@@ -42,12 +42,12 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
             </div>
             <div>
               <h3 className="text-lg font-bold">Raccourcis Clavier</h3>
-              <p className="text-xs text-slate-400 font-mono">Keyboard Navigation</p>
+              <p className={`text-xs font-mono ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Keyboard Navigation</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-full text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors"
+            className={`p-2 rounded-full transition-colors ${darkMode ? 'text-slate-400 hover:text-white hover:bg-slate-800/60' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}
             title="Fermer"
           >
             <X className="w-5 h-5" />
@@ -69,7 +69,7 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
                 <Icon className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span className="text-sm font-medium">{label}</span>
               </div>
-              <kbd className="px-2.5 py-1 text-xs font-mono font-bold rounded-lg bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 shadow-sm">
+              <kbd className={`px-2.5 py-1 text-xs font-mono font-bold rounded-lg bg-emerald-500/15 border border-emerald-500/30 shadow-sm ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>
                 {key}
               </kbd>
             </div>
@@ -78,11 +78,11 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
 
         {/* Footer info */}
         <div className="mt-6 pt-4 border-t border-slate-700/40 text-center">
-          <p className="text-xs text-slate-400">
+          <p className={`text-xs ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
             Appuyez sur n'importe quelle touche depuis n'importe où pour naviguer instantanément.
           </p>
         </div>
       </div>
-    </div>
+    </div>  
   );
 };

@@ -11,7 +11,7 @@ export const Footer = React.memo(() => {
 
   return (
     <footer className={`border-t py-8 sm:py-12 transition-colors duration-300 ${
-      darkMode ? 'bg-transparent border-emerald-500/20 text-emerald-200/70' : 'bg-[#f5f5f0] border-emerald-200 text-slate-600'
+      darkMode ? 'bg-transparent border-emerald-500/20 text-emerald-200/70' : 'bg-slate-100 border-emerald-300 text-slate-800'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 pb-6 sm:pb-8 border-b border-emerald-500/20">
@@ -24,7 +24,7 @@ export const Footer = React.memo(() => {
               </div>
             </div>
             <div>
-              <div className="font-bold text-white text-sm sm:text-base">{userProfile.name}</div>
+              <div className={`font-bold text-sm sm:text-base ${darkMode ? 'text-white' : 'text-slate-900'}`}>{userProfile.name}</div>
             </div>
           </div>
 
@@ -34,7 +34,7 @@ export const Footer = React.memo(() => {
               href={userProfile.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className={`p-2 sm:p-2.5 rounded-xl border transition-all ${darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-emerald-200 text-slate-600 hover:text-emerald-600 hover:border-emerald-300'}`}
+              className={`p-2 sm:p-2.5 rounded-xl border transition-all ${darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-slate-300 text-slate-700 hover:text-emerald-600 hover:border-emerald-400'}`}
               title="LinkedIn"
               id="footer-linkedin-link"
             >
@@ -44,7 +44,7 @@ export const Footer = React.memo(() => {
               href={userProfile.twitter || 'https://twitter.com'}
               target="_blank"
               rel="noopener noreferrer"
-              className={`p-2 sm:p-2.5 rounded-xl border transition-all ${darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-emerald-300 text-slate-600 hover:text-emerald-600 hover:border-emerald-400'}`}
+              className={`p-2 sm:p-2.5 rounded-xl border transition-all ${darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-slate-300 text-slate-700 hover:text-emerald-600 hover:border-emerald-400'}`}
               title="Twitter / X"
               id="footer-twitter-link"
             >
@@ -54,7 +54,7 @@ export const Footer = React.memo(() => {
               href={userProfile.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 sm:p-2.5 rounded-xl bg-[#041a12]/80 border border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50 transition-all"
+              className={`p-2 sm:p-2.5 rounded-xl border transition-all ${darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-slate-300 text-slate-700 hover:text-emerald-600 hover:border-emerald-400'}`}
               title="GitHub"
               id="footer-github-link"
             >
@@ -64,7 +64,7 @@ export const Footer = React.memo(() => {
               href={userProfile.facebook || 'https://facebook.com'}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 sm:p-2.5 rounded-xl bg-[#041a12]/80 border border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50 transition-all"
+              className={`p-2 sm:p-2.5 rounded-xl border transition-all ${darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-emerald-400 hover:border-emerald-400/50' : 'bg-white border-slate-300 text-slate-700 hover:text-emerald-600 hover:border-emerald-400'}`}
               title="Facebook"
               id="footer-facebook-link"
             >
@@ -75,7 +75,7 @@ export const Footer = React.memo(() => {
           {/* Back to top button */}
           <button
             onClick={scrollToTop}
-            className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl border transition-all text-xs font-mono ${darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-white hover:border-emerald-400/50' : 'bg-white border-emerald-200 text-slate-600 hover:text-slate-900 hover:border-emerald-300'}`}
+            className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl border transition-all text-xs font-mono ${darkMode ? 'bg-[#041a12]/80 border-emerald-500/20 text-emerald-200 hover:text-white hover:border-emerald-400/50' : 'bg-white border-slate-300 text-slate-700 hover:text-slate-900 hover:border-emerald-400'}`}
             id="back-to-top-btn"
           >
             <span className="hidden sm:inline">Haut de page</span>
@@ -86,12 +86,12 @@ export const Footer = React.memo(() => {
 
         {/* Bottom Copyright */}
         <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-xs font-mono">
-          <div className={darkMode ? 'text-slate-500' : 'text-slate-600'}>
+          <div className={darkMode ? 'text-slate-500' : 'text-slate-700'}>
             <div className="text-center sm:text-left">
               © {new Date().getFullYear()} {userProfile.name}. Tous droits réservés.
             </div>
           </div>
-          <div className={`flex items-center gap-1 text-center sm:text-right ${darkMode ? 'text-slate-500' : 'text-slate-600'}`}>
+          <div className={`flex items-center gap-1 text-center sm:text-right ${darkMode ? 'text-slate-500' : 'text-slate-700'}`}>
             <span>Conçu avec passion à Dakar, Sénégal 🇸🇳</span>
           </div>
         </div>

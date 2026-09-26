@@ -53,7 +53,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
         <form onSubmit={handleSubmit} className="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-slate-400 mb-1">Nom complet</label>
+              <label className={`block text-xs font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Nom complet</label>
               <input
                 type="text"
                 value={formData.name}
@@ -66,7 +66,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-400 mb-1">Titre professionnel</label>
+              <label className={`block text-xs font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Titre professionnel</label>
               <input
                 type="text"
                 value={formData.title}
@@ -81,7 +81,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-slate-400 mb-1">Email</label>
+              <label className={`block text-xs font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Email</label>
               <input
                 type="email"
                 value={formData.email}
@@ -94,7 +94,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-400 mb-1">Localisation</label>
+              <label className={`block text-xs font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Localisation</label>
               <input
                 type="text"
                 value={formData.location}
@@ -107,7 +107,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-400 mb-1">Présentation courte (Bio)</label>
+            <label className={`block text-xs font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Présentation courte (Bio)</label>
             <textarea
               rows={3}
               value={formData.bio}
@@ -120,7 +120,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-slate-400 mb-1">Lien GitHub</label>
+              <label className={`block text-xs font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Lien GitHub</label>
               <input
                 type="url"
                 value={formData.github}
@@ -132,7 +132,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-400 mb-1">Lien LinkedIn</label>
+              <label className={`block text-xs font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Lien LinkedIn</label>
               <input
                 type="url"
                 value={formData.linkedin}
@@ -149,7 +149,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-colors"
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-colors ${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}
             >
               Annuler
             </button>
