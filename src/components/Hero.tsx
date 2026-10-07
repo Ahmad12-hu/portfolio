@@ -30,15 +30,6 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
   const [titleIndex, setTitleIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [blink, setBlink] = useState(true);
-
-  // Blinking cursor
-  useEffect(() => {
-    const blinkInterval = setInterval(() => {
-      setBlink((prev) => !prev);
-    }, 500);
-    return () => clearInterval(blinkInterval);
-  }, []);
 
   // Typewriter typing logic
   useEffect(() => {
@@ -128,11 +119,7 @@ export const Hero = React.memo<HeroProps>(({ onOpenCv, profile }) => {
               <span className={`text-transparent bg-clip-text bg-gradient-to-r ${darkMode ? 'from-emerald-400 via-teal-300 to-cyan-400' : 'from-emerald-700 via-teal-600 to-cyan-700'}`}>
                 {displayedTypewriterText}
               </span>
-              <span
-                className={`w-0.5 h-5 sm:h-7 bg-emerald-400 inline-block transition-opacity duration-100 ${
-                  blink ? 'opacity-100' : 'opacity-0'
-                }`}
-              />
+              <span className="w-0.5 h-5 sm:h-7 bg-emerald-400 inline-block animate-blink" />
             </div>
 
             <p className={`text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-3xl ${

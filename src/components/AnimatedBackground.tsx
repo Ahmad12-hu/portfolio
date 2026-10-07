@@ -169,6 +169,8 @@ export const AnimatedBackground: React.FC = () => {
 
     let rotationY = 0.45;
     const rotationX = 0.35;
+    let lastFrameTime = 0;
+    let depthFrame = 0;
 
     let cachedGradient: CanvasGradient | null = null;
     let cachedGradientRadius = -1;
@@ -178,14 +180,28 @@ export const AnimatedBackground: React.FC = () => {
     const LAND_COLOR = 'rgb(34, 120, 85)';
     const SEA_COLOR = 'rgb(45, 100, 130)';
 
-    const render = () => {
+    const render = (now: number) => {
+      // Replanification AVANT tout early-return : la boucle ne s'arrête jamais.
+      animationFrameId = requestAnimationFrame(render);
+
+      // Cadence limitée à ~30 fps ; le mouvement dépend du temps réel (dt),
+      // la vitesse perçue est donc identique à 60 fps avec 2x moins de CPU.
+      if (lastFrameTime === 0) {
+        lastFrameTime = now;
+        return;
+      }
+      const elapsed = now - lastFrameTime;
+      if (elapsed < 31) return;
+      lastFrameTime = now;
+      const dt = Math.min(elapsed / 1000, 0.25);
+
       ctx.clearRect(0, 0, width, height);
 
       const globeRadius = Math.max(width, height) * 0.45;
       const centerX = width * 0.5;
       const centerY = height * 0.5;
 
-      rotationY += 0.0015;
+      rotationY += 0.09 * dt; // ≈ 0.0015/frame à 60 fps (vitesse inchangée)
 
       const cosY = Math.cos(rotationY);
       const sinY = Math.sin(rotationY);
@@ -294,7 +310,7 @@ export const AnimatedBackground: React.FC = () => {
 
       for (let idx = 0; idx < globePoints.length; idx++) {
         const p = globePoints[idx];
-        p.pulse += 0.035;
+        p.pulse += 2.1 * dt; // ≈ 0.035/frame à 60 fps (vitesse inchangée)
         const proj = project3D(p.baseX, p.baseY, p.baseZ);
         const entry = projectedBuffer[idx];
         entry.sx = proj.sx;
@@ -303,7 +319,10 @@ export const AnimatedBackground: React.FC = () => {
         entry.scale = proj.scale;
       }
 
-      projectedBuffer.sort((a, b) => b.z - a.z);
+      // Tri de profondeur seulement 1 frame sur 6 : indiscernable à l'œil, 6x moins de coût.
+      if (depthFrame++ % 6 === 0) {
+        projectedBuffer.sort((a, b) => b.z - a.z);
+      }
 
       for (let idx = 0; idx < projectedBuffer.length; idx++) {
         const entry = projectedBuffer[idx];
@@ -351,7 +370,7 @@ export const AnimatedBackground: React.FC = () => {
       });
 
       arcs.forEach((arc) => {
-        arc.progress += arc.speed;
+        arc.progress += arc.speed * 60 * dt; // vitesse historique fondée sur 60 fps
         if (arc.progress > 1) arc.progress = 0;
 
         const proj1 = project3D(arc.x1, arc.y1, arc.z1, 15);
@@ -386,10 +405,9 @@ export const AnimatedBackground: React.FC = () => {
         ctx.stroke();
       });
 
-      animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    animationFrameId = requestAnimationFrame(render);
 
     return () => {
       window.removeEventListener('resize', handleResize);

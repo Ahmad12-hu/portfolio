@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { Suspense, useState, useEffect, useCallback } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -6,11 +6,21 @@ import { Projects } from './components/Projects';
 import { Skills } from './components/Skills';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-import { ProjectModal } from './components/ProjectModal';
-import { CvModal } from './components/CvModal';
-import { EditProfileModal } from './components/EditProfileModal';
-import { KeyboardShortcutsModal } from './components/KeyboardShortcutsModal';
 import { AnimatedBackground } from './components/AnimatedBackground';
+
+// Modales chargées à la demande (hors bundle initial) pour un premier rendu plus rapide.
+const ProjectModal = React.lazy(() =>
+  import('./components/ProjectModal').then((m) => ({ default: m.ProjectModal }))
+);
+const CvModal = React.lazy(() =>
+  import('./components/CvModal').then((m) => ({ default: m.CvModal }))
+);
+const EditProfileModal = React.lazy(() =>
+  import('./components/EditProfileModal').then((m) => ({ default: m.EditProfileModal }))
+);
+const KeyboardShortcutsModal = React.lazy(() =>
+  import('./components/KeyboardShortcutsModal').then((m) => ({ default: m.KeyboardShortcutsModal }))
+);
 import { Project, UserProfile } from './types';
 import { userProfile as initialUserProfile } from './data/portfolioData';
 import { useTheme } from './contexts/ThemeContext';
@@ -40,6 +50,18 @@ export default function App() {
 
   const scrollToSection = useCallback((sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
+    // Préchargement des chunks de modales après le premier rendu :
+    // le bundle initial reste léger, mais les modales s'ouvrent instantanément.
+    const prefetchId = window.setTimeout(() => {
+      void import('./components/ProjectModal');
+      void import('./components/CvModal');
+      void import('./components/EditProfileModal');
+      void import('./components/KeyboardShortcutsModal');
+    }, 1500);
+    return () => window.clearTimeout(prefetchId);
   }, []);
 
   useEffect(() => {
@@ -102,27 +124,44 @@ export default function App() {
 
       <Footer />
 
-      <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
+      {/* Modales : montées uniquement quand ouvertes → chunks chargés à la demande */}
+      {selectedProject && (
+        <Suspense fallback={null}>
+          <ProjectModal
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
+        </Suspense>
+      )}
 
-      <CvModal
-        isOpen={cvModalOpen}
-        onClose={() => setCvModalOpen(false)}
-      />
+      {cvModalOpen && (
+        <Suspense fallback={null}>
+          <CvModal
+            isOpen={cvModalOpen}
+            onClose={() => setCvModalOpen(false)}
+          />
+        </Suspense>
+      )}
 
-      <EditProfileModal
-        isOpen={editProfileModalOpen}
-        onClose={() => setEditProfileModalOpen(false)}
-        userProfile={profile}
-        onSave={setProfile}
-      />
+      {editProfileModalOpen && (
+        <Suspense fallback={null}>
+          <EditProfileModal
+            isOpen={editProfileModalOpen}
+            onClose={() => setEditProfileModalOpen(false)}
+            userProfile={profile}
+            onSave={setProfile}
+          />
+        </Suspense>
+      )}
 
-      <KeyboardShortcutsModal
-        isOpen={shortcutsModalOpen}
-        onClose={() => setShortcutsModalOpen(false)}
-      />
+      {shortcutsModalOpen && (
+        <Suspense fallback={null}>
+          <KeyboardShortcutsModal
+            isOpen={shortcutsModalOpen}
+            onClose={() => setShortcutsModalOpen(false)}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }

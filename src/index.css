@@ -87,3 +87,18 @@
   background-size: 200% 100%;
   animation: shimmer 3s infinite;
 }
+
+/* Clignotement du curseur du Hero (animation CSS : 0 re-renders React) */
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-start infinite;
+}
+
